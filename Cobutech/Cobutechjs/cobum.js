@@ -1,6 +1,9 @@
 // Cobutechjs/cobum.js
 
-// ---------------------- Top Typing Animation ----------------------
+// =========================================================================
+//                             TOP TYPING ANIMATION
+// =========================================================================
+
 const topTypingElement = document.querySelector('.typing-animation-top');
 const topText = "COBUTECH INDUSTRY BEST TECH EVER";
 const topTypingSpeed = 150; // Adjust speed in milliseconds
@@ -20,7 +23,10 @@ function typeTopText() {
 // Start the top typing animation when the script loads
 typeTopText();
 
-// ---------------------- Continue Section ----------------------
+// =========================================================================
+//                            CONTINUE SECTION
+// =========================================================================
+
 const continueTypingElement = document.querySelector('.typing-animation-continue');
 const continueButton = document.getElementById('continue-button');
 const authButtonsDiv = document.getElementById('auth-buttons');
@@ -43,10 +49,9 @@ function typeContinueText() {
     }
 }
 
-// Initially hide the Continue button
+// Initially hide the Continue button and the auth buttons
 if (continueButton) {
     continueButton.style.display = 'none';
-    // Add event listener to the Continue button
     continueButton.addEventListener('click', () => {
         if (authButtonsDiv) {
             authButtonsDiv.classList.remove('hidden'); // Show Sign In and Log In buttons
@@ -55,10 +60,18 @@ if (continueButton) {
     });
 }
 
+// Initially hide the Sign In and Log In buttons
+if (authButtonsDiv) {
+    authButtonsDiv.classList.add('hidden');
+}
+
 // Start the continue typing animation when the script loads
 typeContinueText();
 
-// ---------------------- Contact Section ----------------------
+// =========================================================================
+//                             CONTACT SECTION
+// =========================================================================
+
 const contactTypingElement = document.querySelector('.typing-animation-contact');
 const contactButton = document.getElementById('contact-button');
 const contactText = "TO CONTACT ME";
@@ -87,3 +100,7 @@ if (contactButton) {
 
 // Start the contact typing animation when the script loads
 typeContactText();
+
+// =========================================================================
+//                               END OF FILE
+// =========================================================================
