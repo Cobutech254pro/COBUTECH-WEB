@@ -7,5 +7,5 @@ backgroundImage.classList.add('visible');
 
 // Redirect to inlet.html after a delay
 setTimeout(() => {
-    window.location.href = 'Cobutech/) Cobutechhtml/cobuin.html';
+    window.location.href = 'Cobutech/Cobutechhtml/cobuin.html';
 }, redirectionDelay);
