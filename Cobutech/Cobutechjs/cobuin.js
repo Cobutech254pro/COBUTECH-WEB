@@ -41,7 +41,7 @@ function startLoadingAnimation() {
             clearInterval(progressInterval);
             // Add a 3-second delay before redirecting
             setTimeout(() => {
-                window.location.href = 'main.html';
+                window.location.href = 'Cobutech/Cobutechhtml/cobum.html';
             }, redirectionDelay);
         }
     }, progressSpeed);
