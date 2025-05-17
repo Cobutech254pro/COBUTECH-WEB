@@ -57,21 +57,10 @@ body {
 }
 
 .typing-animation-continue-container {
-    overflow: hidden;
-    white-space: nowrap;
-    margin-bottom: 15px;
-}
-
-.typing-animation-continue {
     font-size: 1.2em;
     font-weight: bold;
     color: #a7ffeb; /* Light green */
-    animation: typing-continue 10s steps(20, end) infinite alternate; /* Adjust */
-}
-
-@keyframes typing-continue {
-    from { transform: translateX(100%); }
-    to { transform: translateX(-100%); }
+    margin-bottom: 15px;
 }
 
 #continue-button {
@@ -163,5 +152,5 @@ body {
 }
 
 .hidden {
-    display: none;
-  }
+    display: none !important; /* Ensure it overrides other display properties */
+}
