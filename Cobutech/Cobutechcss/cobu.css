@@ -16,15 +16,15 @@ body {
     justify-content: center;
     align-items: center;
     width: 80%; /* Adjust as needed */
-    max-width: 600px; /* Maximum width of the content area */
+    max-width: 700px; /* Increased max-width to accommodate larger elements */
 }
 
 .profile-container {
-    width: 5cm; /* Diameter since radius is 2.5cm */
-    height: 5cm;
+    width: 7cm; /* Increased diameter by 2cm (originally 5cm) */
+    height: 7cm; /* Increased height by 2cm */
     border-radius: 50%;
     overflow: hidden;
-    margin-right: 0.5cm; /* Space between profile and text - corrected to 0.5cm */
+    margin-right: 0.5cm; /* Space between profile and text */
     position: relative; /* For positioning the movement */
     opacity: 0; /* Initially hidden */
     transition: opacity 2s ease-in-out; /* Fade in over 2 seconds */
@@ -50,6 +50,7 @@ body {
     white-space: nowrap; /* Prevent text from wrapping */
     opacity: 0; /* Initially hidden */
     transition: opacity 2s ease-in-out; /* Fade in over 2 seconds */
+    font-size: 1.4em; /* Increased font size for the container */
 }
 
 .typing-animation-container.visible {
@@ -57,7 +58,7 @@ body {
 }
 
 .typing-animation {
-    font-size: 1.2em; /* Adjust as needed */
+    font-size: inherit; /* Inherit the font size from the container */
     font-weight: bold;
     color: white; /* Or any color you prefer for the text */
     overflow: hidden; /* Hide the text as it types */
