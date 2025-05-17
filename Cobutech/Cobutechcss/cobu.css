@@ -6,26 +6,25 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    flex-direction: column;
+    flex-direction: column; /* Arrange items vertically */
     position: relative;
     overflow: hidden; /* To hide the text initially */
 }
 
-.container {
+.container-vertical {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column; /* Arrange profile and text vertically */
+    align-items: center; /* Center them horizontally */
     width: 80%; /* Adjust as needed */
-    max-width: 700px; /* Increased max-width to accommodate larger elements */
+    max-width: 700px; /* Maximum width of the content area */
 }
 
 .profile-container {
-    width: 7cm; /* Increased diameter by 2cm (originally 5cm) */
-    height: 7cm; /* Increased height by 2cm */
+    width: 7cm; /* Diameter */
+    height: 7cm; /* Height */
     border-radius: 50%;
     overflow: hidden;
-    margin-right: 0.5cm; /* Space between profile and text */
-    position: relative; /* For positioning the movement */
+    margin-bottom: 1em; /* Space below the profile */
     opacity: 0; /* Initially hidden */
     transition: opacity 2s ease-in-out; /* Fade in over 2 seconds */
 }
@@ -46,11 +45,11 @@ body {
 .typing-animation-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Align text to the start (left) within its container */
+    align-items: center; /* Center text horizontally */
     white-space: nowrap; /* Prevent text from wrapping */
     opacity: 0; /* Initially hidden */
     transition: opacity 2s ease-in-out; /* Fade in over 2 seconds */
-    font-size: 1.4em; /* Increased font size for the container */
+    font-size: 3em; /* Increased font size */
 }
 
 .typing-animation-container.visible {
@@ -58,10 +57,10 @@ body {
 }
 
 .typing-animation {
-    font-size: inherit; /* Inherit the font size from the container */
+    font-size: inherit; /* Inherit font size */
     font-weight: bold;
-    color: white; /* Or any color you prefer for the text */
-    overflow: hidden; /* Hide the text as it types */
+    color: white; /* Text color */
+    overflow: hidden; /* Hide text during typing */
 }
 
 .top-text {
