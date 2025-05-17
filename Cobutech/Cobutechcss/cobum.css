@@ -1,0 +1,167 @@
+/* Cobutechcss/cobum.css */
+body {
+    margin: 0;
+    background-image: url('../../../Cobutech/Cobutechimages/cobum.jpg'); /* Path to your background image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white; /* Default text color */
+    font-family: sans-serif; /* Basic font */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 20px; /* Add some padding at the bottom for the copyright */
+}
+
+.typing-animation-top-container {
+    margin-top: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.typing-animation-top {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #e0f7fa; /* Light blue */
+    animation: typing-top 15s linear infinite; /* Adjust duration as needed */
+}
+
+@keyframes typing-top {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+.profile-container {
+    width: 5cm; /* Diameter for 2.5cm radius */
+    height: 5cm;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border: 3px solid white; /* Optional border */
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.continue-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.typing-animation-continue-container {
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: 15px;
+}
+
+.typing-animation-continue {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #a7ffeb; /* Light green */
+    animation: typing-continue 10s steps(20, end) infinite alternate; /* Adjust */
+}
+
+@keyframes typing-continue {
+    from { transform: translateX(100%); }
+    to { transform: translateX(-100%); }
+}
+
+#continue-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    background-color: purple;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Optional glow */
+    transition: box-shadow 0.3s ease;
+}
+
+#continue-button:hover {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+#auth-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.purple-button {
+    padding: 10px 15px;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    background-color: purple;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    transition: box-shadow 0.3s ease;
+}
+
+.purple-button:hover {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+.contact-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.typing-animation-contact-container {
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: 15px;
+}
+
+.typing-animation-contact {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ffab91; /* Light orange */
+    animation: typing-contact 12s steps(15, end) infinite alternate; /* Adjust */
+}
+
+@keyframes typing-contact {
+    from { transform: translateX(100%); }
+    to { transform: translateX(-100%); }
+}
+
+#contact-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    background-color: purple;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    transition: box-shadow 0.3s ease;
+}
+
+#contact-button:hover {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+.copyright {
+    position: absolute;
+    bottom: 10px;
+    font-size: 0.8em;
+}
+
+.hidden {
+    display: none;
+  }
