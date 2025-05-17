@@ -14,37 +14,51 @@ let topTextIndex = 0;
 let bottomTextIndex = 0;
 let profilePosition = 0;
 let movingLeft = true;
+let animationActive = true;
 
 // Initially center the profile
 profileContainer.style.position = 'relative';
 profileContainer.style.left = '0';
 
-function startAnimation() {
-    requestAnimationFrame(function moveProfile() {
-        if (movingLeft && (topTextIndex < textTop.length || bottomTextIndex < textBottom.length)) {
+function moveProfile() {
+    if (animationActive) {
+        if (movingLeft) {
             profilePosition -= moveAmount;
             profileContainer.style.left = profilePosition + 'px';
-            requestAnimationFrame(moveProfile);
         }
-    });
-
-    typeText(topTextElement, textTop, 0, () => {
-        typeText(bottomTextElement, textBottom, 0, () => {
-            // After the animation, set a timeout for redirection
-            setTimeout(() => {
-                window.location.href = 'Cobutechhtml/inlet.html';
-            }, redirectionDelay);
-        });
-    });
+        requestAnimationFrame(moveProfile);
+    }
 }
 
 function typeText(element, text, index, callback) {
     if (index < text.length) {
         element.textContent = text.substring(0, index + 1);
-        setTimeout(() => typeText(element, text, index + 1, callback), typingSpeed);
+        setTimeout(() => {
+            if (element === topTextElement) {
+                topTextIndex = index + 1;
+            } else if (element === bottomTextElement) {
+                bottomTextIndex = index + 1;
+            }
+            typeText(element, text, index + 1, callback);
+        }, typingSpeed);
     } else if (callback) {
         callback();
     }
+}
+
+function startAnimation() {
+    requestAnimationFrame(moveProfile);
+
+    typeText(topTextElement, textTop, 0, () => {
+        typeText(bottomTextElement, textBottom, 0, () => {
+            // After all text is typed, stop the profile movement
+            animationActive = false;
+            // Set a timeout for redirection
+            setTimeout(() => {
+                window.location.href = 'Cobutechhtml/inlet.html';
+            }, redirectionDelay);
+        });
+    });
 }
 
 // Make the profile and animation visible and start the animation after the delay
