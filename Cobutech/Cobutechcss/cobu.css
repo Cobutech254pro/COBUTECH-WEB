@@ -17,8 +17,8 @@ body {
     align-items: center; /* Center them horizontally */
     width: 80%; /* Adjust as needed */
     max-width: 700px; /* Maximum width of the content area */
-}
 
+}
 .profile-container {
     width: 7cm; /* Diameter */
     height: 7cm; /* Height */
@@ -28,6 +28,7 @@ body {
     opacity: 0; /* Initially hidden */
     transition: opacity 2s ease-in-out; /* Fade in over 2 seconds */
 }
+
 
 .profile-image {
     width: 100%;
