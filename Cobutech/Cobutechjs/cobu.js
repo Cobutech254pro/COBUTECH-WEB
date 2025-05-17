@@ -1,6 +1,6 @@
 // Cobutechjs/cobu.js
 const backgroundImage = document.querySelector('.background-image');
-const appearanceDelay = 1000; // 2 seconds
+const appearanceDelay = 1; // 2 seconds
 const redirectionDelay = 3000; // 4 seconds
 
 // Make the background image visible after the delay
