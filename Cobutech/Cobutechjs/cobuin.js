@@ -9,7 +9,8 @@ const typingSpeed = 100; // milliseconds per character
 let timeLeft = 60;
 let typingIndex = 0;
 let progress = 0;
-const progressSpeed = 50; // milliseconds per increment
+const progressSpeed = 30; // Reduced delay for faster loading (milliseconds per increment)
+const redirectionDelay = 3000; // 3 seconds delay before redirecting
 
 function typeText() {
     if (typingIndex < textToType.length) {
@@ -38,7 +39,10 @@ function startLoadingAnimation() {
         }
         if (progress >= 100) {
             clearInterval(progressInterval);
-            window.location.href = 'main.html';
+            // Add a 3-second delay before redirecting
+            setTimeout(() => {
+                window.location.href = 'main.html';
+            }, redirectionDelay);
         }
     }, progressSpeed);
 }
