@@ -1,4 +1,4 @@
-/* Cobutechcss/cobuin.css */
+/* Cobutech/Cobutechcss/cobuin.css */
 body {
     margin: 0;
     overflow: hidden;
@@ -47,6 +47,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .countdown-circle {
@@ -65,17 +66,22 @@ body {
     /* Number will be placed here by JavaScript */
 }
 
-.progress-circle {
-    position: relative;
-    width: 120px;
-    height: 120px;
-    margin-top: 20px;
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     opacity: 0; /* Initially hidden */
     transition: opacity 1s ease-in-out;
 }
 
-.progress-circle.active {
+.loading-container.active {
     opacity: 1;
+}
+
+.loading-circle {
+    position: relative;
+    width: 120px;
+    height: 120px;
 }
 
 .outer-circle {
@@ -95,6 +101,12 @@ body {
     height: calc(100% - 20px);
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.1);
+}
+
+.loading-percentage {
+    margin-top: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
 @keyframes rotate {
