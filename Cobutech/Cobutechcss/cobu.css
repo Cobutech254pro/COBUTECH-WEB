@@ -24,7 +24,7 @@ body {
     height: 5cm;
     border-radius: 50%;
     overflow: hidden;
-    margin-right: 20px; /* Space between profile and text */
+    margin-right: 1cm; /* Space between profile and text - corrected to 1cm */
     position: relative; /* For positioning the movement */
 }
 
@@ -35,6 +35,12 @@ body {
     position: absolute;
     left: 0;
     top: 0;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 4s ease-in-out; /* Fade in over 4 seconds */
+}
+
+.profile-image.visible {
+    opacity: 1;
 }
 
 .typing-animation-container {
