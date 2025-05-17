@@ -1,80 +1,52 @@
 /* Cobutechcss/cobu.css */
 body {
-    background-color: blue;
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    flex-direction: column; /* Arrange items vertically */
-    position: relative;
-    overflow: hidden; /* To hide the text initially */
+    overflow: hidden; /* Prevent scrollbars */
 }
 
-.container-vertical {
-    display: flex;
-    flex-direction: column; /* Arrange profile and text vertically */
-    align-items: center; /* Center them horizontally */
-    width: 80%; /* Adjust as needed */
-    max-width: 700px; /* Maximum width of the content area */
-
-}
-.profile-container {
-    width: 7cm; /* Diameter */
-    height: 7cm; /* Height */
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 1em; /* Space below the profile */
-    opacity: 0; /* Initially hidden */
-    transition: opacity 2s ease-in-out; /* Fade in over 2 seconds */
-}
-
-
-.profile-image {
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    position: absolute;
-    left: 0;
-    top: 0;
+    background-image: url('../Cobutech/Cobutechimages/cbu.jpg'); /* Path to your image */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the image */
+    z-index: -1; /* Place behind other content */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 2s ease-in-out; /* Fade in */
 }
 
-.profile-container.visible {
+.background-image.visible {
     opacity: 1;
 }
 
-.typing-animation-container {
+.overlay {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center text horizontally */
-    white-space: nowrap; /* Prevent text from wrapping */
-    opacity: 0; /* Initially hidden */
-    transition: opacity 2s ease-in-out; /* Fade in over 2 seconds */
-    font-size: 3em; /* Increased font size */
-}
-
-.typing-animation-container.visible {
-    opacity: 1;
-}
-
-.typing-animation {
-    font-size: inherit; /* Inherit font size */
-    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Center vertically */
     color: white; /* Text color */
-    overflow: hidden; /* Hide text during typing */
+    font-weight: bold;
+    text-align: center;
 }
 
-.top-text {
-    /* Styling for "COBUTECH WEB" */
+.title-top {
+    font-size: 2em; /* Adjust size as needed */
+    margin-bottom: 0.5em;
 }
 
-.bottom-text {
-    /* Styling for "INDUSTRY POWER ⚡" */
+.title-bottom {
+    font-size: 1.5em; /* Adjust size as needed */
 }
 
 .copyright {
     position: absolute;
     bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     color: white;
     font-size: 0.8em;
 }
