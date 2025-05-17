@@ -6,15 +6,15 @@
 
 const topTypingElement = document.querySelector('.typing-animation-top');
 const topText = "COBUTECH INDUSTRY BEST TECH EVER";
-const topTypingSpeed = 150; // Adjust speed in milliseconds
+const topTypingSpeed = 50; // Reduced speed for smoother movement
 let topTextIndex = 0;
 
 function typeTopText() {
     if (topTypingElement) {
-        topTypingElement.textContent = topText.substring(0, topTextIndex);
+        topTypingElement.style.transform = `translateX(${100 - (topTextIndex / topText.length) * 200}%)`; // Smooth right to left
         topTextIndex++;
-        if (topTextIndex > topText.length) {
-            topTextIndex = 0; // Reset to loop the animation
+        if (topTextIndex > topText.length * 2) { // Adjust for smoother loop
+            topTextIndex = 0;
         }
         setTimeout(typeTopText, topTypingSpeed);
     }
@@ -27,29 +27,10 @@ typeTopText();
 //                            CONTINUE SECTION
 // =========================================================================
 
-const continueTypingElement = document.querySelector('.typing-animation-continue');
 const continueButton = document.getElementById('continue-button');
 const authButtonsDiv = document.getElementById('auth-buttons');
-const continueText = "PLEASE CONTINUE BY";
-const continueTypingSpeed = 100; // Adjust speed in milliseconds
-let continueTextIndex = 0;
 
-function typeContinueText() {
-    if (continueTypingElement) {
-        continueTypingElement.textContent = continueText.substring(0, continueTextIndex);
-        continueTextIndex++;
-        if (continueTextIndex > continueText.length) {
-            // Animation complete, show the Continue button
-            if (continueButton) {
-                continueButton.style.display = 'inline-block';
-            }
-        } else {
-            setTimeout(typeContinueText, continueTypingSpeed);
-        }
-    }
-}
-
-// Initially hide the Continue button and the auth buttons
+// Initially hide the Continue button
 if (continueButton) {
     continueButton.style.display = 'none';
     continueButton.addEventListener('click', () => {
@@ -59,14 +40,6 @@ if (continueButton) {
         }
     });
 }
-
-// Initially hide the Sign In and Log In buttons
-if (authButtonsDiv) {
-    authButtonsDiv.classList.add('hidden');
-}
-
-// Start the continue typing animation when the script loads
-typeContinueText();
 
 // =========================================================================
 //                             CONTACT SECTION
