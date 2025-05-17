@@ -1,0 +1,67 @@
+/* Cobutechcss/cobu.css */
+body {
+    background-color: blue;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden; /* To hide the text initially */
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%; /* Adjust as needed */
+    max-width: 600px; /* Maximum width of the content area */
+}
+
+.profile-container {
+    width: 6cm; /* Diameter since radius is 3cm */
+    height: 6cm;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 20px; /* Space between profile and text */
+    position: relative; /* For positioning the movement */
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.typing-animation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align text to the start (left) within its container */
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.typing-animation {
+    font-size: 1.2em; /* Adjust as needed */
+    font-weight: bold;
+    color: white; /* Or any color you prefer for the text */
+    overflow: hidden; /* Hide the text as it types */
+}
+
+.top-text {
+    /* Styling for "COBUTECH WEB" */
+}
+
+.bottom-text {
+    /* Styling for "INDUSTRY POWER ⚡" */
+}
+
+.copyright {
+    position: absolute;
+    bottom: 10px;
+    color: white;
+    font-size: 0.8em;
+}
