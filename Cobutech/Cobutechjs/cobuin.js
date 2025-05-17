@@ -3,6 +3,7 @@ const typingTextElement = document.querySelector('.typing-animation');
 const countdownNumberElement = document.querySelector('.countdown-number');
 const loadingContainer = document.querySelector('.loading-container');
 const loadingPercentageElement = document.querySelector('.loading-percentage');
+const outerCircleElement = document.querySelector('.outer-circle'); // Get the outer circle
 const textToType = "PLEASE WAIT FOR SETUP";
 const typingSpeed = 100; // milliseconds per character
 let timeLeft = 60;
@@ -32,8 +33,9 @@ function startLoadingAnimation() {
     const progressInterval = setInterval(() => {
         progress++;
         loadingPercentageElement.textContent = `${progress}%`;
-        const outerCircle = document.querySelector('.outer-circle');
-        outerCircle.style.borderTopColor = `hsl(${progress * 3.6}, 100%, 50%)`; // Rainbow progress
+        if (outerCircleElement) { // Check if the element exists
+            outerCircleElement.style.borderTopColor = `hsl(${progress * 3.6}, 100%, 50%)`; // Rainbow progress
+        }
         if (progress >= 100) {
             clearInterval(progressInterval);
             window.location.href = 'main.html';
