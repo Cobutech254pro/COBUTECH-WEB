@@ -1,29 +1,27 @@
 // Cobutechjs/cobu.js
 const profileContainer = document.querySelector('.profile-container');
-const profileImage = document.querySelector('.profile-image');
+const typingAnimationContainer = document.querySelector('.typing-animation-container');
 const topTextElement = document.querySelector('.top-text');
 const bottomTextElement = document.querySelector('.bottom-text');
 const textTop = "COBUTECH WEB";
 const textBottom = "INDUSTRY POWER ⚡";
 const typingSpeed = 100; // milliseconds per character
-const profileAppearDelay = 4000; // 4 seconds
-const redirectionDelay = 5000; // 5 seconds
+const appearanceDelay = 2000; // 2 seconds
+const redirectionDelay = 4000; // 4 seconds
 const moveAmount = 2; // Pixels to move per character typed (adjust as needed)
 
 let topTextIndex = 0;
 let bottomTextIndex = 0;
 let profilePosition = 0;
 let movingLeft = true;
-let animationStarted = false;
 
 // Initially center the profile
 profileContainer.style.position = 'relative';
-profileContainer.style.left = '0'; // Center horizontally by default in flex context
+profileContainer.style.left = '0';
 
-// Function to start the animation and movement
 function startAnimation() {
     requestAnimationFrame(function moveProfile() {
-        if (movingLeft && topTextIndex < textTop.length + bottomTextIndex < textBottom.length) {
+        if (movingLeft && (topTextIndex < textTop.length || bottomTextIndex < textBottom.length)) {
             profilePosition -= moveAmount;
             profileContainer.style.left = profilePosition + 'px';
             requestAnimationFrame(moveProfile);
@@ -49,9 +47,9 @@ function typeText(element, text, index, callback) {
     }
 }
 
-// Make the profile visible after the delay
+// Make the profile and animation visible and start the animation after the delay
 setTimeout(() => {
-    profileImage.classList.add('visible');
-    // Start the typing animation and profile movement after the profile appears
-    setTimeout(startAnimation, 0); // Start immediately after appearing
-}, profileAppearDelay);
+    profileContainer.classList.add('visible');
+    typingAnimationContainer.classList.add('visible');
+    startAnimation();
+}, appearanceDelay);
