@@ -15,10 +15,13 @@ body {
     padding-bottom: 20px; /* Add some padding at the bottom for the copyright */
 }
 
+/* --- TOP TYPING ANIMATION --- */
 .typing-animation-top-container {
     margin-top: 20px;
     overflow: hidden;
     white-space: nowrap;
+    width: 100%; /* Ensure it takes full width to allow movement */
+    text-align: center; /* Center the container initially */
 }
 
 .typing-animation-top {
@@ -26,6 +29,7 @@ body {
     font-weight: bold;
     color: #e0f7fa; /* Light blue */
     animation: typing-top 15s linear infinite; /* Adjust duration as needed */
+    display: inline-block; /* Allows transform to work correctly with text */
 }
 
 @keyframes typing-top {
@@ -33,6 +37,7 @@ body {
     100% { transform: translateX(-100%); }
 }
 
+/* --- PROFILE --- */
 .profile-container {
     width: 5cm; /* Diameter for 2.5cm radius */
     height: 5cm;
@@ -49,6 +54,7 @@ body {
     object-fit: cover;
 }
 
+/* --- CONTINUE SECTION --- */
 .continue-section {
     display: flex;
     flex-direction: column;
@@ -61,6 +67,7 @@ body {
     font-weight: bold;
     color: #a7ffeb; /* Light green */
     margin-bottom: 15px;
+    text-align: center; /* Center the static text */
 }
 
 #continue-button {
@@ -74,12 +81,14 @@ body {
     cursor: pointer;
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Optional glow */
     transition: box-shadow 0.3s ease;
+    display: inline-block; /* Ensure it's displayed by default, JS will hide it */
 }
 
 #continue-button:hover {
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
 }
 
+/* --- AUTH BUTTONS --- */
 #auth-buttons {
     display: flex;
     gap: 10px;
@@ -103,6 +112,7 @@ body {
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
 }
 
+/* --- CONTACT SECTION --- */
 .contact-section {
     display: flex;
     flex-direction: column;
@@ -145,12 +155,14 @@ body {
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
 }
 
+/* --- COPYRIGHT --- */
 .copyright {
     position: absolute;
     bottom: 10px;
     font-size: 0.8em;
 }
 
+/* --- HIDDEN CLASS --- */
 .hidden {
     display: none !important; /* Ensure it overrides other display properties */
 }
