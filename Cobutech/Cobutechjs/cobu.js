@@ -6,11 +6,14 @@ const textTop = "COBUTECH WEB";
 const textBottom = "INDUSTRY POWER ⚡";
 const typingSpeed = 100; // milliseconds per character
 const moveSpeed = 5; // pixels per frame
+const animationDelay = 3000; // 3 seconds
+const redirectionDelay = 5000; // 5 seconds
 
 let topTextIndex = 0;
 let bottomTextIndex = 0;
 let profilePosition = 0;
 let movingLeft = false;
+let animationStarted = false;
 
 function typeText(element, text, index, callback) {
     if (index < text.length) {
@@ -37,16 +40,20 @@ function moveProfile() {
     requestAnimationFrame(moveProfile);
 }
 
-// Start typing the top text
-typeText(topTextElement, textTop, 0, () => {
-    // Once top text is typed, start typing the bottom text
-    typeText(bottomTextElement, textBottom, 0, () => {
-        // Optionally start the profile movement after the text is done
-        requestAnimationFrame(moveProfile);
-        // Initially set the profile to the right side
-        profileContainer.style.position = 'absolute';
-        profileContainer.style.right = '0';
-        profilePosition = 0; // Reset position for movement
-        movingLeft = true; // Start moving left immediately
+// Initially position the profile on the right
+profileContainer.style.position = 'absolute';
+profileContainer.style.right = '0';
+
+// Start the typing animation and profile movement after a delay
+setTimeout(() => {
+    animationStarted = true;
+    requestAnimationFrame(moveProfile);
+    typeText(topTextElement, textTop, 0, () => {
+        typeText(bottomTextElement, textBottom, 0, () => {
+            // After the animation, set a timeout for redirection
+            setTimeout(() => {
+                window.location.href = 'Cobutech/Cobutechhtml/cobuin.html';
+            }, redirectionDelay);
+        });
     });
-});
+}, animationDelay);
