@@ -1,4 +1,5 @@
 // Cobutechserver/server.js
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -7,7 +8,7 @@ const handleSignin = require('./Cobutechauth/cobusn.js'); // Import the signin r
 
 const app = express();
 const port = process.env.PORT || 3000; // Use environment port or default to 3000
-const frontendPath = process.env.FRONTEND_PATH || __dirname; // Default to current directory
+const frontendPath = path.join(__dirname, '..'); // Point to the parent directory (root)
 
 app.use(bodyParser.json());
 
