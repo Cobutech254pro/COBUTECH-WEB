@@ -1,16 +1,16 @@
 {
-  "name": "COBUTECH-WEB",
+  "name": "cobutech-project",
   "version": "1.0.0",
   "description": "Full stack project for Cobutech application",
   "main": "Cobutechserver/server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
+    "start": "node Cobutechserver/server.js",
+    "dev": "nodemon Cobutechserver/server.js",
     "build": "echo 'No frontend build process defined yet'",
-    "serve": "node server.js"
+    "serve": "node Cobutechserver/server.js"
   },
-  "author": "Your Name",
-  "license": "ISC",
+  "author": "Cobutec254pro",
+  "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
