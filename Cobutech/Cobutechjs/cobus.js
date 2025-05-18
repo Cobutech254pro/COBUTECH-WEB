@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         step2.classList.remove('hidden');
         setTimeout(() => {
             step2.classList.add('active');
-        }, 50);
+        }, 50); // Small delay to trigger the transition
     });
 
     togglePasswordButton.addEventListener('click', () => {
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             strength = 'medium';
         }
         passwordStrengthDiv.textContent = `Password strength: ${strength}`;
-        passwordStrengthDiv.className = strength;
+        passwordStrengthDiv.className = strength; // Add class for color styling
         enableSubmitIfConditionsMet(); // Check if submit should be enabled
     });
 
@@ -62,15 +62,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     signinForm.addEventListener('submit', (event) => {
-        event.preventDefault();
+        event.preventDefault(); // Prevent default form submission for now
 
+        // In a real scenario, you would send the data to your backend here
         const username = document.getElementById('username').value;
         const email = document.getElementById('email').value;
         const password = passwordInput.value;
 
         console.log('Submitting:', { username, email, password });
 
+        // After successful backend storage, redirect to verification.html
         window.location.href = 'verification.html';
     });
 });
-            
