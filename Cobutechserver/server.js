@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const handleSignup = require('./Cobutechauth/cobus'); // Import the signup route handler
+const handleSignup = require('./Cobutechauth/cobus'); // Updated import path
 
 const app = express();
 const port = 3000;
