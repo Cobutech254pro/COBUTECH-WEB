@@ -9,14 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const togglePasswordButton = document.getElementById('toggle-password');
     const signinForm = document.getElementById('signin-form');
     const termsCheckbox = document.getElementById('terms');
-    const submitButton = step2.querySelector('button[type="submit"]'); // Get the submit button within step-2
+    const submitButton = step2.querySelector('button[type="submit"]');
 
     nextButton.addEventListener('click', () => {
         step1.classList.add('hidden');
         step2.classList.remove('hidden');
         setTimeout(() => {
             step2.classList.add('active');
-        }, 50); // Small delay to trigger the transition
+        }, 50);
     });
 
     togglePasswordButton.addEventListener('click', () => {
@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
             strength = 'medium';
         }
         passwordStrengthDiv.textContent = `Password strength: ${strength}`;
-        passwordStrengthDiv.className = strength; // Add class for color styling
-        enableSubmitIfConditionsMet(); // Check if submit should be enabled
+        passwordStrengthDiv.className = strength;
+        enableSubmitIfConditionsMet();
     });
 
     confirmPasswordInput.addEventListener('input', () => {
@@ -46,11 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
             passwordMatchDiv.textContent = 'Passwords do not match';
             passwordMatchDiv.className = 'mismatch';
         }
-        enableSubmitIfConditionsMet(); // Check if submit should be enabled
+        enableSubmitIfConditionsMet();
     });
 
     termsCheckbox.addEventListener('change', () => {
-        enableSubmitIfConditionsMet(); // Check if submit should be enabled
+        enableSubmitIfConditionsMet();
     });
 
     function enableSubmitIfConditionsMet() {
@@ -62,16 +62,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     signinForm.addEventListener('submit', (event) => {
-        event.preventDefault(); // Prevent default form submission for now
+        event.preventDefault();
 
-        // In a real scenario, you would send the data to your backend here
         const username = document.getElementById('username').value;
         const email = document.getElementById('email').value;
         const password = passwordInput.value;
 
-        console.log('Submitting:', { username, email, password });
-
-        // After successful backend storage, redirect to verification.html
-        window.location.href = 'verification.html';
+        fetch('/api/auth/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, email, password }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(error => {
+                    throw new Error(error.message || 'Sign-up failed');
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
+            alert(data.message || 'Sign-up successful. Please check your email for verification.');
+            window.location.href = 'verification-pending.html'; // Redirect to a page informing user to check email
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert(error.message || 'Network error or sign-up failed');
+        });
     });
 });
