@@ -3,30 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In - COBU-TECH INDUSTRY</title>
+    <title>𝐂𝐎𝐁𝐔𝐓𝐄𝐂𝐇 𝐈𝐍𝐃𝐔𝐒𝐓𝐑𝐘</title>
+    <link rel="stylesheet" href="../../../Cobutech/Cobutechcss/cobus.css">
     <link rel="stylesheet" href="../../../Cobutech/Cobutechcss/cobus.css">
 </head>
 <body>
     <div class="signin-container">
-        <h1>Sign In</h1>
+        <h1>𝐂𝐑𝐄𝐀𝐓𝐄 𝐘𝐎𝐔𝐑 𝐀𝐂𝐂𝐎𝐔𝐍𝐓</h1>
         <form id="signin-form">
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
+            <div id="step-1">
+                <div class="form-group">
+                    <label for="username">𝐔𝐬𝐞𝐫𝐧𝐚𝐦𝐞:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">𝐄𝐦𝐚𝐢𝐥:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <button type="button" id="next-step" class="purple-button">𝐍𝐞𝐱𝐭</button>
             </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+
+            <div id="step-2" class="hidden slide-in-right">
+                <div class="form-group">
+                    <label for="password">𝐏𝐚𝐬𝐬𝐰𝐨𝐫𝐝:</label>
+                    <div class="password-input-container">
+                        <input type="password" id="password" name="password" required>
+                        <button type="button" id="toggle-password" aria-label="Show password">👁️</button>
+                    </div>
+                    <div id="password-strength"></div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">𝐂𝐨𝐧𝐟𝐢𝐫𝐦 𝐏𝐚𝐬𝐬𝐰𝐨𝐫𝐝:</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                    <div id="password-match"></div>
+                </div>
+                <div class="form-group terms-agreement">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">𝐈 agree 𝐭𝐨 𝐭𝐡𝐞 <a href="../../../Cobutech/Cobutechhtml/cobut.html" target="_blank">Terms and Conditions</a></label>
+                </div>
+                <button type="submit" class="purple-button" disabled>𝐑𝐄𝐆𝐈𝐒𝐓𝐄𝐑</button>
+                <div class="link-to-login">
+                    𝐀𝐥𝐫𝐞𝐚𝐝𝐲 𝐡𝐚𝐯𝐞 𝐚𝐧 𝐚𝐜𝐜𝐨𝐮𝐧𝐭? <a href="login.html">𝐋𝐎𝐆𝐈𝐍</a>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" class="purple-button">Sign In</button>
-            <div class="link-to-login">
-                Already have an account? <a href="../../../Cobutech/Cobutechhtml/cobuh.html">Log In</a>
+
+            <div class="social-signin">
+                <p>𝐎𝐫 𝐬𝐢𝐠𝐧 𝐢𝐧 𝐰𝐢𝐭𝐡:</p>
+                <button type="button" class="social-button google">𝐆𝐨𝐨𝐠𝐥𝐞</button>
+                <button type="button" class="social-button facebook">𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤</button>
+                <button type="button" class="social-button docker">𝐃𝐨𝐜𝐤𝐞𝐫</button>
+                <button type="button" class="social-button github">𝐆𝐢𝐭𝐇𝐮𝐛</button>
             </div>
         </form>
     </div>
+
+    <script src="../../../Cobutech/Cobutechjs/cobus.js"></script>
 </body>
 </html>
