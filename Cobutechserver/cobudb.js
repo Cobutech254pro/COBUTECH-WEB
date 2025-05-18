@@ -1,5 +1,5 @@
 // Cobutechserver/cobudb.js
-require('dotenv').config();
+require('.env').config();
 const { Pool } = require('pg');
 
 const pool = new Pool({
