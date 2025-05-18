@@ -187,3 +187,46 @@ body {
     0% { left: 100%; }
     100% { left: -100%; }
 }
+.about-cobutech {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #e0f7fa;
+    padding: 30px;
+    margin: 30px auto;
+    width: 85%;
+    border-radius: 12px;
+    font-size: 1em;
+    line-height: 1.8;
+    text-align: left;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    opacity: 0;
+    animation: fadeInAbout 2s ease forwards;
+    animation-delay: 1s;
+}
+
+.about-cobutech h2 {
+    font-size: 1.6em;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.about-cobutech h3 {
+    color: #80deea;
+    margin-top: 25px;
+}
+
+.about-cobutech ul {
+    list-style-type: square;
+    padding-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.about-cobutech li {
+    margin-bottom: 10px;
+}
+
+@keyframes fadeInAbout {
+    to {
+        opacity: 1;
+    }
+}
