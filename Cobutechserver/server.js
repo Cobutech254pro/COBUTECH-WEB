@@ -3,8 +3,8 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const handleSignup = require('Cobutechauth/cobus');
-const handleSignin = require('Cobutechauth/cobusn.js'); 
+const handleSignup = require('./Cobutechauth/cobus');
+const handleSignin = require('./Cobutechauth/cobusn.js'); 
 
 const app = express();
 const port = process.env.PORT || 5000; 
