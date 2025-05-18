@@ -1,0 +1,85 @@
+/* Cobutechcss/cobus.css */
+body {
+    margin: 0;
+    background-color: #222; /* Dark background */
+    color: white;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.signin-container {
+    background-color: #333;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 400px;
+    max-width: 90%;
+    text-align: center;
+}
+
+h1 {
+    color: #e0f7fa; /* Light blue heading */
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    color: #a7ffeb; /* Light green label */
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #444;
+    color: white;
+    box-sizing: border-box; /* Prevent padding from increasing the input's width */
+}
+
+.purple-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    background-color: purple;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.purple-button:hover {
+    background-color: #8a2be2; /* Slightly lighter purple on hover */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+.link-to-login {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+.link-to-login a {
+    color: #ffab91; /* Light orange link */
+    text-decoration: none;
+}
+
+.link-to-login a:hover {
+    text-decoration: underline;
+}
