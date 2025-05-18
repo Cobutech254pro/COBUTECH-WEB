@@ -1,4 +1,4 @@
-/* Cobutechcss/cobus.css */
+/* Cobutechcss/cobus.css (Updated - Includes Sign-in Styles) */
 body {
     margin: 0;
     background-color: #222; /* Dark background */
@@ -83,3 +83,139 @@ input[type="password"] {
 .link-to-login a:hover {
     text-decoration: underline;
 }
+
+/* --- Specific Styles for Sign-in Page --- */
+.hidden {
+    display: none !important;
+}
+
+.slide-in-right {
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.slide-in-right.active {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.password-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input-container input[type="password"] {
+    padding-right: 35px; /* Make space for the toggle button */
+}
+
+.password-input-container button#toggle-password {
+    position: absolute;
+    right: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    outline: none;
+}
+
+#password-strength {
+    margin-top: 5px;
+    font-size: 0.8em;
+}
+
+#password-strength.weak {
+    color: red;
+}
+
+#password-strength.medium {
+    color: yellow;
+}
+
+#password-strength.strong {
+    color: green;
+}
+
+#password-match {
+    margin-top: 5px;
+    font-size: 0.8em;
+}
+
+#password-match.match {
+    color: green;
+}
+
+#password-match.mismatch {
+    color: red;
+}
+
+.terms-agreement {
+    margin-top: 20px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+.terms-agreement input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.terms-agreement label a {
+    color: #ffab91;
+    text-decoration: none;
+}
+
+.terms-agreement label a:hover {
+    text-decoration: underline;
+}
+
+.social-signin {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.social-signin p {
+    color: #ccc;
+    margin-bottom: 10px;
+}
+
+.social-button {
+    padding: 10px 15px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    transition: opacity 0.3s ease;
+}
+
+.social-button:hover {
+    opacity: 0.8;
+}
+
+.social-button.google {
+    background-color: #db4437;
+}
+
+.social-button.facebook {
+    background-color: #4267b2;
+}
+
+.social-button.docker {
+    background-color: #0db7ed;
+}
+
+.social-button.github {
+    background-color: #333;
+}
+/* Cobutechcss/signin.css (Simplified - For Sign-in Page Specific Overrides) */
+
+/* You might add any sign-in page specific styles here that override the global ones */
+.signin-container {
+    /* Example of an override if needed */
+    /* background-color: #444; */
+}
+
