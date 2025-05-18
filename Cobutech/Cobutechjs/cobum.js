@@ -17,8 +17,9 @@ typeTopText();
 const continueButton = document.getElementById('continue-button');
 const authButtonsDiv = document.getElementById('auth-buttons');
 if (continueButton) {
-    // continueButton.style.display = 'none'; // REMOVE OR COMMENT OUT THIS LINE
     continueButton.addEventListener('click', () => {
+        console.log("Continue button clicked!");
+        console.log("authButtonsDiv:", authButtonsDiv);
         if (authButtonsDiv) {
             authButtonsDiv.classList.remove('hidden');
             continueButton.style.display = 'none';
