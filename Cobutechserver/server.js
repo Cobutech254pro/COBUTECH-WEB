@@ -8,7 +8,7 @@ const handleSignin = require('./Cobutechauth/cobusn.js'); // Import the signin r
 
 const app = express();
 const port = process.env.PORT || 3000; // Use environment port or default to 3000
-const frontendPath = path.join(__dirname, '..'); // Point to the parent directory (root)
+const frontendPath = path.join(__dirname, '.Cobutech.'); // Point to the parent directory (root)
 
 app.use(bodyParser.json());
 
