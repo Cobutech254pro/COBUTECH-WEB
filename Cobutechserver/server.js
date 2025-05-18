@@ -4,23 +4,18 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const handleSignup = require('./Cobutechauth/cobus');
-const handleSignin = require('./Cobutechauth/cobusn.js'); // Import the signin route handler
+const handleSignin = require('./Cobutechauth/cobusn.js'); 
 
 const app = express();
-const port = process.env.PORT || 3000; // Use environment port or default to 3000
-const frontendPath = path.join(__dirname, '..','Cobutech'); // Point to the parent directory (root)
+const port = process.env.PORT || 5000; 
 
-app.use(bodyParser.json());
-
-// Serve index.html as the entry point (using environment variable)
+app.use(express.json());
+app.use(express.static(path.join(__dirname, '../')));
 app.get('/', (req, res) => {
-    res.sendFile(path.join(frontendPath, 'index.html'));
+  res.sendFile(path.join(__dirname, '../index.html'));
+
 });
-
-// Mount the signup route handler
 handleSignup(app);
-
-// Mount the signin route handler
 handleSignin(app);
 
 app.listen(port, () => {
