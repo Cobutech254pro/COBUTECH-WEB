@@ -1,1 +1,83 @@
 
+/* frontend/public/css/contact.css */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: black;
+    overflow: hidden; /* Hide scrollbars for the code rain */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #eee; /* Light text */
+}
+
+.main-buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.main-button {
+    background-color: #333;
+    color: #eee;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+}
+
+.main-button:hover {
+    background-color: #555;
+}
+
+.sub-buttons {
+    display: none; /* Initially hidden */
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.sub-buttons.visible {
+    display: flex;
+}
+
+.social-button {
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.social-button:hover {
+    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5); /* Plasma glow effect */
+}
+
+/* Social media colors */
+.tiktok { background-color: #000; }
+.facebook { background-color: #1877F2; }
+.instagram { background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D); }
+.twitter { background-color: #1DA1F2; }
+.github { background-color: #333; }
+.telegram { background-color: #229ED9; }
+.whatsapp { background-color: #25D366; }
+.youtube { background-color: #FF0000; }
+.call { background-color: #075E54; }
+.email { background-color: #EA4335; }
+
+/* Code Rain Canvas Styling */
+#socialLogosCanvas { /* Reusing the ID for the canvas */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Behind other content */
+}
