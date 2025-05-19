@@ -33,7 +33,7 @@ const handleSignup = (app) => {
             const hashedPassword = await bcrypt.hash(password, saltRounds);
 
             const newUser = await db.query(
-                'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id, username, email',
+                'INSERT INTO users (username, email, password_hash,registration_date) VALUES ($1, $2, $3) RETURNING id, username, email',
                 [username, email, hashedPassword]
             );
 
