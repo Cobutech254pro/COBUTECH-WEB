@@ -32,10 +32,10 @@ const handleSignup = (app) => {
             const saltRounds = 10;
             const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-            const newUser = await db.query(
-                'INSERT INTO users (username, email, passward_hash,) VALUES ($1, $2, $3,NOW) RETURNING user_id, username, email',
-                [username, email, hashedPassword]
-            );
+           const newUser = await db.query(
+                 'INSERT INTO users (username, email, password_hash, registration_date) VALUES ($1, $2, $3, NOW()) RETURNING user_id, username, email',
+                  [username, email, hashedPassword]
+    );
 
             res.status(201).json({ message: 'User created successfully!', user: newUser.rows[0] });
 
