@@ -4,10 +4,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const handleSignup = require('./Cobutechauth/cobus');
-const handleSignin = require('./Cobutechauth/cobusn.js'); 
+const handleSignin = require('./Cobutechauth/cobusn.js');
+const handleVerifyCode = require('./Cobutechauth/cobuv'); // Correct path
 
 const app = express();
-const port = process.env.PORT || 5000; 
+const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../')));
@@ -17,6 +18,7 @@ app.get('/', (req, res) => {
 });
 handleSignup(app);
 handleSignin(app);
+handleVerifyCode(app); // Mount the verification route handler
 
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
