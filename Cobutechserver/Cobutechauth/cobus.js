@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
-const db = require('../cobudb'); // Adjust path as needed
+const db = require('../cobudb');
+const sendVerificationEmail = require('../Cobutechutils/cobuut.js'); 
 
 const handleSignup = (app) => {
     app.post('/api/auth/signup', async (req, res) => {
@@ -39,10 +40,16 @@ const handleSignup = (app) => {
                 [username, email, hashedPassword, verificationCode, expiryTime]
             );
 
-            // In a real application, you would call your email sending function here
-            console.log(`Verification code for ${email}: ${verificationCode}`); // For testing
+            // Call the sendVerificationEmail function
+            const emailSent = await sendVerificationEmail(email, verificationCode);
 
-            res.status(201).json({ message: 'User created successfully! Please check your email for the verification code.', user: newUserResult.rows[0] });
+            if (emailSent) {
+                res.status(201).json({ message: 'User created successfully! Please check your email for the verification code.', user: newUserResult.rows[0] });
+            } else {
+                // Consider how you want to handle email sending failures
+                console.error('Error sending verification email to:', email);
+                res.status(500).json({ message: 'Failed to send verification email. Please try again later.' });
+            }
 
         } catch (error) {
             console.error('Error during sign-up:', error);
