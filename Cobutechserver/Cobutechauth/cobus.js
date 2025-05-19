@@ -1,4 +1,3 @@
-// Cobutechserver/auth/signup.js
 const bcrypt = require('bcrypt');
 const db = require('../cobudb'); // Adjust path as needed
 
@@ -32,12 +31,18 @@ const handleSignup = (app) => {
             const saltRounds = 10;
             const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-           const newUser = await db.query(
-                 'INSERT INTO users (username, email, password_hash, registration_date) VALUES ($1, $2, $3, NOW()) RETURNING user_id, username, email',
-                  [username, email, hashedPassword]
-    );
+            const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+            const expiryTime = new Date(Date.now() + 120000); // Code valid for 2 minutes (120000 milliseconds)
 
-            res.status(201).json({ message: 'User created successfully!', user: newUser.rows[0] });
+            const newUserResult = await db.query(
+                'INSERT INTO users (username, email, password_hash, verification_code, verification_code_expiry, registration_date) VALUES ($1, $2, $3, $4, $5, NOW()) RETURNING user_id, username, email',
+                [username, email, hashedPassword, verificationCode, expiryTime]
+            );
+
+            // In a real application, you would call your email sending function here
+            console.log(`Verification code for ${email}: ${verificationCode}`); // For testing
+
+            res.status(201).json({ message: 'User created successfully! Please check your email for the verification code.', user: newUserResult.rows[0] });
 
         } catch (error) {
             console.error('Error during sign-up:', error);
@@ -47,4 +52,3 @@ const handleSignup = (app) => {
 };
 
 module.exports = handleSignup;
-              
