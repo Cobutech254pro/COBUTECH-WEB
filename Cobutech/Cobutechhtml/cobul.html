@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login to Your Account</title>
+    <link rel="stylesheet" href="../../../Cobutech/Cobutechcss/cobul.css">
+</head>
+<body>
+    <div class="signin-container"> <h1>Login to Your Account</h1>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-input-container">
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    <button type="button" id="toggle-password">👁️</button>
+                </div>
+            </div>
+
+            <div class="form-group" style="text-align: right; margin-top: -10px; margin-bottom: 20px;">
+                <a href="#" style="color: #ffab91; text-decoration: none; font-size: 0.9em;">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="purple-button">Login</button>
+            <p id="login-message" class="link-to-login" style="color: red;"></p>
+        </form>
+
+        <p class="link-to-login">Don't have an account? <a href="cobus.html">Sign Up</a></p>
+        <div class="social-signin">
+            <p>Or log in with:</p>
+            <button class="social-button google">Google</button>
+            <button class="social-button facebook">Facebook</button>
+            <button class="social-button github">GitHub</button>
+        </div>
+    </div>
+
+    <script src="../../../Cobutech/Cobutechjs/cobul.js"></script>
+</body>
+</html>
