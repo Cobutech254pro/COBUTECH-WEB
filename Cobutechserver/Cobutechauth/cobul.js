@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt'); 
 const jwt = require('jsonwebtoken'); 
 const db = require('../cobudb'); 
-const jwtSecret = process.env.JWT_SECRET ||
+const jwtSecret = process.env.JWT_SECRET || 'your_super_secret_jwt_key_please_change_this_in_production_!';
 const handleSignin = (app) => {
     app.post('/api/auth/signin', async (req, res) => {
         const { email, password } = req.body; 
@@ -13,7 +13,6 @@ const handleSignin = (app) => {
                 'SELECT user_id, username, email, password_hash, is_verified, verification_code_expiry FROM users WHERE email = $1',
                 [email]
             );
-
             if (userResult.rows.length === 0) {
                 return res.status(401).json({ message: 'Invalid credentials.' });
             }
