@@ -1,5 +1,5 @@
 const db = require('../../cobudb'); // Adjust path as needed
-const sendVerificationEmail = require('../../utils/sendVerificationEmail'); // Adjust path as needed
+const sendVerificationEmail = require('../../Cobutechutils/cobuut.js'); // Adjust path as needed
 
 const handleResendVerificationCode = (app) => {
     app.post('/api/auth/resend-verification-code', async (req, res) => {
