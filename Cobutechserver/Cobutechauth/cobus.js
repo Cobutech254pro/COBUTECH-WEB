@@ -28,7 +28,7 @@ const handleSignup = (app) => {
             const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
             const expiryTime = new Date(Date.now() + 120000); 
             const newUserResult = await db.query(
-                'INSERT INTO users (username, email, password_hash, registration_date, verification_token) VALUES ($1, $2, $3, $4, $5, NOW(), $6) RETURNING user_id, username, email',
+                'INSERT INTO users (username, email, password_hash, registration_date, verification_token) VALUES ($1, $2, $3, NOW(), $6) RETURNING user_id, username, email',
                 [username, email, hashedPassword, verificationCode, expiryTime, verificationCode] 
             );
             const emailSent = await sendVerificationEmail(email, verificationCode);
