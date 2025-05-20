@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             console.log('Success:', data);
             alert(data.message || 'Sign-up successful. Please check your email for verification.');
-            window.location.href = 'verification-pending.html'; // Redirect to a page informing user to check email
+            window.location.href = '../../../Cobutech/Cobutechhtml/cobuv.html'; // Redirect to a page informing user to check email
         })
         .catch((error) => {
             console.error('Error:', error);
