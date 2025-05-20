@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const db = require('../cobudb');
-const sendVerificationEmail = require('../Cobutechutils/cobuut.js'); 
+const sendVerificationEmail = require('../Cobutechutils/cobuut.js');
+ const { v4: uuidv4 } = require('uuid'); 
 
 const handleSignup = (app) => {
     app.post('/api/auth/signup', async (req, res) => {
@@ -33,20 +34,19 @@ const handleSignup = (app) => {
             const hashedPassword = await bcrypt.hash(password, saltRounds);
 
             const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
-            const expiryTime = new Date(Date.now() + 120000); // Code valid for 2 minutes (120000 milliseconds)
+            const expiryTime = new Date(Date.now() + 120000); 
+
 
             const newUserResult = await db.query(
-                'INSERT INTO users (username, email, password_hash, verification_code, verification_code_expiry, registration_date) VALUES ($1, $2, $3, $4, $5, NOW()) RETURNING user_id, username, email',
-                [username, email, hashedPassword, verificationCode, expiryTime]
+                'INSERT INTO users (username, email, password_hash, verification_code, verification_code_expiry, registration_date, verification_token) VALUES ($1, $2, $3, $4, $5, NOW(), $6) RETURNING user_id, username, email',
+                [username, email, hashedPassword, verificationCode, expiryTime, verificationCode] 
             );
 
-            // Call the sendVerificationEmail function
             const emailSent = await sendVerificationEmail(email, verificationCode);
 
             if (emailSent) {
                 res.status(201).json({ message: 'User created successfully! Please check your email for the verification code.', user: newUserResult.rows[0] });
             } else {
-                // Consider how you want to handle email sending failures
                 console.error('Error sending verification email to:', email);
                 res.status(500).json({ message: 'Failed to send verification email. Please try again later.' });
             }
