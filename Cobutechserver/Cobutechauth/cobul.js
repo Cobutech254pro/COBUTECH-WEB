@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt'); 
 const jwt = require('jsonwebtoken'); 
 const db = require('../cobudb'); 
-const jwtSecret = process.env.JWT_SECRET || 'your_super_secret_jwt_key_please_change_this_in_production_!'; // Fallback for development
+const jwtSecret = process.env.JWT_SECRET ||
 const handleSignin = (app) => {
     app.post('/api/auth/signin', async (req, res) => {
         const { email, password } = req.body; 
