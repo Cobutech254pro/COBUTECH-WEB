@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             alert(data.message || 'Email verified successfully!');
             localStorage.removeItem('verificationEmail'); // Clean up local storage
-            window.location.href = '/account/userhtml'; // Redirect to dashboard
+            window.location.href = '../../../Cobutech/Cobutechtml/cobup.html'; // Redirect to dashboard
         })
         .catch(error => {
             alert(error.message);
