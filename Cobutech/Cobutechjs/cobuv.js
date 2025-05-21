@@ -176,6 +176,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert(error.message);
             });
         }
+            resendButton.disabled = true;
+            resendAvailableIn = 20;
+            resendCountdownElement.textContent = resendAvailableIn;
+            document.getElementById('request-code-message').style.display = 'block';
+            clearInterval(resendInterval); 
+            resendInterval = setInterval(() => {
+                resendAvailableIn--;
+                resendCountdownElement.textContent = resendAvailableIn;
+                if (resendAvailableIn === 0) {
+                    clearInterval(resendInterval);
+                    resendButton.disabled = false;
+                    resendCountdownElement.textContent = "Ready";
+                }
+            }, 1000);
+            
+        }
     });
     verifyButton.addEventListener('click', function() {
         const enteredCode = Array.from(codeBoxes)
