@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Success:', data);
             alert(data.message || 'Sign-up successful. Please check your email for verification.');
             localStorage.setItem('verificationEmail', email);
-            window.location.href = '../../../Cobutech/Cobutechhtml/cobuv.html';
+            window.location.href = '../../../Cobutech/Cobutechhtml/cobup.html';
         } catch (error) {
             console.error('Error:', error);
             alert(error.message || 'Network error or sign-up failed');
