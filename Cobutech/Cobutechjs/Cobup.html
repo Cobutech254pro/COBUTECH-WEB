@@ -1,0 +1,64 @@
+<div class="prompts-container">
+    <h2>👋 Welcome! Let's Get You Set Up!</h2>
+
+    <div class="prompt-card" id="prompt-profile-picture">
+        <span class="prompt-icon">📸</span>
+        <div class="prompt-content">
+            <h3>Add Your Profile Picture</h3>
+            <p>Make your profile shine! Upload a profile picture so others can recognize you easily.</p>
+        </div>
+        <div class="prompt-action">
+            <button onclick="window.location.href='/account/profile-settings'">Add Photo</button>
+        </div>
+    </div>
+
+    <div class="prompt-card" id="prompt-complete-profile">
+        <span class="prompt-icon">📝</span>
+        <div class="prompt-content">
+            <h3>Complete Your Profile</h3>
+            <p>Tell us more about yourself. Complete your profile to connect and get personalized recommendations.</p>
+        </div>
+        <div class="prompt-action">
+            <button onclick="window.location.href='/account/edit-profile'">Edit Profile</button>
+        </div>
+    </div>
+
+    <div class="prompt-card" id="prompt-explore-feature">
+        <span class="prompt-icon">✨</span>
+        <div class="prompt-content">
+            <h3>Explore Our Main Feature</h3>
+            <p>Ready to dive in? Explore our [Your App's Core Feature Name] to see what's possible!</p>
+        </div>
+        <div class="prompt-action">
+            <button onclick="window.location.href='/dashboard/main-feature'">Start Exploring</button>
+        </div>
+    </div>
+
+    <div class="prompt-card" id="prompt-set-preferences">
+        <span class="prompt-icon">⚙️</span>
+        <div class="prompt-content">
+            <h3>Set Your Preferences</h3>
+            <p>Customize your experience. Adjust your settings to tailor [App Name] to your needs and interests.</p>
+        </div>
+        <div class="prompt-action">
+            <button onclick="window.location.href='/account/settings'">Manage Settings</button>
+        </div>
+    </div>
+
+    <div class="prompt-card" id="prompt-invite-friends">
+        <span class="prompt-icon">🤝</span>
+        <div class="prompt-content">
+            <h3>Invite Your Friends</h3>
+            <p>Sharing is caring! Invite your friends to join [App Name] and enjoy [benefit of joining].</p>
+        </div>
+        <div class="prompt-action">
+            <button onclick="window.location.href='/account/invite-friends'">Invite Friends</button>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="dismissAllPromptsBtn" style="background-color: #6c757d; color: white; border: none; border-radius: 5px; padding: 10px 20px; cursor: pointer;">Dismiss All Prompts</button>
+    </div>
+
+</div>
+<script src="/js/dashboard_prompts.js"></script>
