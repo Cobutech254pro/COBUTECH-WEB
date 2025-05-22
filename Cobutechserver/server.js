@@ -7,6 +7,7 @@ const handleSignin = require('./Cobutechauth/cobusn.js');
 const handleVerifyCode = require('./Cobutechauth/cobuv'); 
 const handleResendVerificationCode  = require('./Cobutechauth/cobuvr'); 
 const handleLogin = require('./Cobutechauth/cobul');
+const handleForgotPasswordReset = require('./Cobutechauth/cobul');
 const app = express();
 const port = process.env.PORT || 5000;
 const jwtSecret = process.env.JWT_SECRET;
@@ -26,6 +27,7 @@ handleSignin(app, jwtSecret);
 handleVerifyCode(app, jwtSecret); 
 handleResendVerificationCode(app, jwtSecret); 
 handleLogin(app, jwtSecret);
+handleForgotPasswordReset(app);
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
 });
