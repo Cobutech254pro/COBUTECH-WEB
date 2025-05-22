@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+Document.addEventListener('DOMContentLoaded', () => {
     const step1 = document.getElementById('step-1');
     const step2 = document.getElementById('step-2');
     const nextButton = document.getElementById('next-step');
@@ -7,9 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const passwordStrengthDiv = document.getElementById('password-strength');
     const passwordMatchDiv = document.getElementById('password-match');
     const togglePasswordButton = document.getElementById('toggle-password');
-    const signinForm = document.getElementById('signin-form'); // This is your signup form
+    const signupForm = document.getElementById('signup-form'); // <--- RENAMED from signinForm to signupForm
     const termsCheckbox = document.getElementById('terms');
     const submitButton = step2.querySelector('button[type="submit"]');
+
+    // Make sure your HTML form has id="signup-form"
+    // e.g., <form id="signup-form"> ... </form>
 
     // Event listener for the "Next Step" button
     nextButton.addEventListener('click', () => {
@@ -68,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Event listener for the signup form submission
-    signinForm.addEventListener('submit', async (event) => { // Added 'async' keyword
+    signupForm.addEventListener('submit', async (event) => { // Added 'async' keyword, used signupForm
         event.preventDefault();
 
         const username = document.getElementById('username').value;
@@ -84,24 +87,42 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({ username, email, password }),
             });
 
+            const data = await response.json(); // Always parse JSON for error messages too
+
             if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Sign-up failed');
+                // Handle server errors (e.g., 400, 409, 500)
+                if (response.status === 409 && data.redirectToVerification) {
+                    // Scenario: User already exists but unverified (from server response)
+                    alert(data.message);
+                    localStorage.setItem('verificationEmail', data.email);
+                    window.location.href = '../../../Cobutech/Cobutechhtml/cobuv.html';
+                } else if (response.status === 409 && data.alreadyVerified) {
+                    // Scenario: User already exists and IS verified
+                    alert(data.message + ' Please try logging in.');
+                    // Optionally redirect to login page
+                    // window.location.href = 'path/to/your/login.html';
+                } else {
+                    // Generic server error
+                    throw new Error(data.message || 'Sign-up failed due to server error.');
+                }
+            } else {
+                // Successful 200 or 201 response
+                console.log('Success:', data);
+                alert(data.message || 'Sign-up successful. Please check your email for verification.');
+
+                // If the server explicitly tells us to redirect to verification
+                if (data.redirectToVerification && data.email) {
+                    localStorage.setItem('verificationEmail', data.email);
+                    window.location.href = '../../../Cobutech/Cobutechhtml/cobuv.html';
+                } else {
+                    // For any other successful scenario (e.g., direct login for some reason, though not typical for signup)
+                    // You might redirect to a dashboard or a login page here.
+                    console.log("Signup success, but no explicit verification redirect. User might need to log in manually.");
+                }
             }
 
-            const data = await response.json();
-
-            console.log('Success:', data);
-            alert(data.message || 'Sign-up successful. Please check your email for verification.');
-
-            // --- IMPORTANT FIX: Store email in localStorage before redirecting ---
-            localStorage.setItem('verificationEmail', email);
-
-            // Redirect to the verification page
-            window.location.href = '../../../Cobutech/Cobutechhtml/cobuv.html';
-
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error during signup fetch:', error);
             alert(error.message || 'Network error or sign-up failed');
         }
     });
