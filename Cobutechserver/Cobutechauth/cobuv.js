@@ -1,68 +1,51 @@
-// Cobutechserver/Cobutechauth/verifyCode.js
-const db = require('../cobudb'); 
+// Cobutechauth/cobuv.js (This is your handleVerifyCode logic, assuming)
+Const db = require('../../cobudb'); // Adjust path as needed
 
-const handleVerifyCode = (app) => {
-    app.post('/api/auth/verify-code', async (req, res) => {
-        const { email, code } = req.body;
+// UPDATED: Added jwtSecret to the parameter list
+const handleVerifyCode = (app, jwtSecret) => { // <--- ADDED jwtSecret here
+    app.post('/api/auth/verify-code', async (req, res) => { // Assuming this is your verify code endpoint
+        const { email, verificationCode } = req.body;
 
-        console.log('--- VERIFY CODE ATTEMPT ---');
-        console.log('Received verification request for email:', email, 'code:', code);
-
-        if (!email || !code) {
-            console.log('Error: Missing email or code for verification.');
+        if (!email || !verificationCode) {
             return res.status(400).json({ message: 'Please provide email and verification code.' });
         }
 
         try {
-            // 1. Find the user by email
             const userResult = await db.query(
-                'SELECT user_id, username, email, verification_code, verification_code_expiry, is_verified FROM users WHERE email = $1',
+                'SELECT user_id, email, is_verified, verification_code, verification_code_expiry FROM users WHERE email = $1',
                 [email]
             );
 
             if (userResult.rows.length === 0) {
-                console.log('User not found for email:', email);
                 return res.status(404).json({ message: 'User not found.' });
             }
 
             const user = userResult.rows[0];
 
-            // If already verified, no need to proceed
             if (user.is_verified) {
-                console.log('User already verified:', user.email);
-                return res.status(200).json({ message: 'Email is already verified!' });
+                return res.status(200).json({ message: 'Account is already verified.' });
             }
 
-            // 2. Check if the provided code matches the stored verification_code
-            if (code !== user.verification_code) {
-                console.log('Invalid verification code provided for email:', email);
+            // Check if code matches and is not expired
+            const currentTime = new Date();
+            if (user.verification_code === verificationCode && currentTime < user.verification_code_expiry) {
+                // Mark user as verified
+                await db.query(
+                    'UPDATE users SET is_verified = TRUE, verification_code = NULL, verification_code_expiry = NULL WHERE user_id = $1',
+                    [user.user_id]
+                );
+                return res.status(200).json({ message: 'Account verified successfully! You can now log in.' });
+            } else if (currentTime >= user.verification_code_expiry) {
+                return res.status(400).json({ message: 'Verification code has expired. Please request a new one.' });
+            } else {
                 return res.status(400).json({ message: 'Invalid verification code.' });
             }
 
-            // 3. Check if the verification code has expired
-            const now = new Date();
-            const expiryTime = new Date(user.verification_code_expiry);
-
-            if (now > expiryTime) {
-                console.log('Verification code expired for email:', email);
-                return res.status(400).json({ message: 'Verification code has expired. Please request a new one.' });
-            }
-
-            // 4. Update the user's is_verified status to TRUE and clear code/expiry
-            await db.query(
-                'UPDATE users SET is_verified = TRUE, verification_code = NULL, verification_code_expiry = NULL WHERE email = $1',
-                [email]
-            );
-
-            console.log('Email verified successfully for user:', email);
-            // 5. Send a success response
-            res.status(200).json({ message: 'Email verified successfully!' });
-
         } catch (error) {
-            console.error('CRITICAL ERROR during verification:', error);
-            res.status(500).json({ message: 'An internal server error occurred during verification.' });
+            console.error('Error during code verification:', error);
+            res.status(500).json({ message: 'An error occurred during verification.' });
         }
     });
 };
 
-module.exports = handleVerifyCode;
+module.exports = handleVerifyCode; // This should be exported for handleVerifyCode
