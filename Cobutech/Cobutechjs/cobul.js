@@ -1,4 +1,6 @@
-document.addEventListener('DOMContentLoaded', () => {
+// File: ../../../Cobutech/Cobutechjs/cobul.js
+
+Document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
@@ -44,8 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                // --- Fetch API call to backend signin endpoint ---
-                const response = await fetch('/api/auth/login', {
+                // --- Fetch API call to backend login endpoint ---
+                const response = await fetch('/api/auth/login', { // <--- Changed endpoint to /api/auth/login
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -56,8 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json(); // Always parse JSON for both success and error messages
 
                 // --- DEBUGGING LOGS (for Login Response) ---
-                console.log('Response from /api/auth/signin (Status):', response.status);
-                console.log('Response data from /api/auth/signin:', data);
+                console.log('Response from /api/auth/login (Status):', response.status); // Changed endpoint in log
+                console.log('Response data from /api/auth/login:', data); // Changed endpoint in log
                 // --- END DEBUGGING LOGS ---
 
                 if (response.ok) { // Check if HTTP status is 2xx
@@ -71,20 +73,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // --- Handle redirection based on verification status ---
                     if (data.user && data.user.is_verified) {
-                        window.location.href = '/account/userhtml'; // Redirect to user dashboard
+                        window.location.href = '/dashboard'; // Redirect to user dashboard using the new route
                     } else {
                         // Account not verified, redirect to verification page
                         alert(data.message || 'Your email is not verified. Please verify your email.');
                         localStorage.setItem('verificationEmail', email); // Store email for verification page
-                        window.location.href = '../../../Cobutech/Cobutechhtml/cobuv.html';
+                        window.location.href = '/verify'; // Redirect to verification page using the new route
                     }
                 } else {
                     // Handle server-side errors (e.g., 401, 403, 500)
                     loginMessage.textContent = data.message || 'Login failed. Please try again.';
                     // Specific handling for unverified users, if not already caught by backend's 403 response
-                    if (data.email && !data.user.is_verified) { // Assuming backend sends user object
+                    if (data.email && data.user && !data.user.is_verified) { // Assuming backend sends user object
                          localStorage.setItem('verificationEmail', email); // Store email for verification page
-                         window.location.href = '../../../Cobutech/Cobutechhtml/cobuv.html';
+                         window.location.href = '/verify'; // Redirect to verification page using the new route
                     }
                 }
             } catch (error) {
