@@ -1,5 +1,5 @@
 // Cobutechauth/cobuv.js (This is your handleVerifyCode logic, assuming)
-Const db = require('../cobudb'); // Adjust path as needed
+Const db = require('./cobudb'); // Adjust path as needed
 
 // UPDATED: Added jwtSecret to the parameter list
 const handleVerifyCode = (app, jwtSecret) => { // <--- ADDED jwtSecret here
