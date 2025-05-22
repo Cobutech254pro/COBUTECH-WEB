@@ -5,7 +5,7 @@ const db = require('../cobudb');
 
 // MODIFIED: Accept jwtSecret as a parameter
 const handleSignin = (app, jwtSecret) => { // <--- Added jwtSecret parameter here
-    app.post('/api/auth/signin', async (req, res) => {
+    app.post('/api/auth/logingin', async (req, res) => {
         // --- Debugging: Log incoming request body ---
         console.log('--- SIGNIN ATTEMPT ---');
         console.log('Received login request body:', req.body);
@@ -99,4 +99,4 @@ const handleSignin = (app, jwtSecret) => { // <--- Added jwtSecret parameter her
     });
 };
 
-module.exports = handleSignin;
+module.exports = handleLogingin;
