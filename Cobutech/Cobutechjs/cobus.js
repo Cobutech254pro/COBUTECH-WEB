@@ -116,6 +116,5 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert(error.message || 'Network error or server unreachable. Please try again.');
             }
         });
-    }
-    enableSubmitIfConditionsMet();
+   
 });
