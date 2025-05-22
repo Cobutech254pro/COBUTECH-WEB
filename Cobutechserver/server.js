@@ -10,7 +10,7 @@ const handleSignup = require('./Cobutechauth/cobus');
 const handleSignin = require('./Cobutechauth/cobusn.js');
 const handleVerifyCode = require('./Cobutechauth/cobuv'); // This handler
 const handleResendVerificationCode  = require('./Cobutechauth/cobuvr'); // This handler
-const handleSignup = require('./Cobutechauth/cobul');
+const handleLogingin = require('./Cobutechauth/cobul');
 const app = express();
 const port = process.env.PORT || 5000;
 
