@@ -1,6 +1,6 @@
 // Cobutechauth/cobuvr.js (Your handleResendVerificationCode)
 const db = require('../cobudb'); // Adjust path as needed
-const sendVerificationEmail = require('../../Cobutechutils/cobuut.js'); // Adjust path as needed
+const sendVerificationEmail = require('../Cobutechutils/cobuut.js'); // Adjust path as needed
 
 // UPDATED: Added jwtSecret to the parameter list
 const handleResendVerificationCode = (app, jwtSecret) => { // <--- ADDED jwtSecret here
