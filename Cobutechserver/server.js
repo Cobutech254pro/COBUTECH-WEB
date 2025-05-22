@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 // Import your handler functions
-const handleSignup = require('./Cobutechauth/cobus');
+const handleSignup = require('./Cobutechauth/cobul');
 const handleSignin = require('./Cobutechauth/cobusn.js');
 const handleVerifyCode = require('./Cobutechauth/cobuv'); // This handler
 const handleResendVerificationCode  = require('./Cobutechauth/cobuvr'); // This handler
