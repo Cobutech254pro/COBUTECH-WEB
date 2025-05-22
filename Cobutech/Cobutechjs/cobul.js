@@ -1,6 +1,4 @@
-// File: ../../../Cobutech/Cobutechjs/cobul.js
-
-Document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
