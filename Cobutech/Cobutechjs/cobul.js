@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Account not verified, redirect to verification page
                         alert(data.message || 'Your email is not verified. Please verify your email.');
                         localStorage.setItem('verificationEmail', email); // Store email for verification page
-                        window.location.href = '/verify'; // Redirect to verification page using the new route
+                        window.location.href = '../../../Cobutech/Cobutechhtml/cobuv.html'; // Redirect to verification page using the new route
                     }
                 } else {
                     // Handle server-side errors (e.g., 401, 403, 500)
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Specific handling for unverified users, if not already caught by backend's 403 response
                     if (data.email && data.user && !data.user.is_verified) { // Assuming backend sends user object
                          localStorage.setItem('verificationEmail', email); // Store email for verification page
-                         window.location.href = '/verify'; // Redirect to verification page using the new route
+                         window.location.href = '../../../Cobutech/Cobutechhtml/cobuv.html'; // Redirect to verification page using the new route
                     }
                 }
             } catch (error) {
