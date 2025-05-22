@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password - Cobutech</title>
+    <link rel="stylesheet" href="../Cobutechcss/style.css">
+    <link rel="stylesheet" href="../Cobutechcss/cobufp.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Forgot Password</h2>
+
+        <div id="email-request-section">
+            <p>Enter your email to receive a password reset code.</p>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <button id="send-code-button">Send Reset Code</button>
+            <p class="message" id="email-message"></p>
+        </div>
+
+        <div id="code-verification-section" style="display: none;">
+            <p>A 6-digit code has been sent to your email. Please enter it below.</p>
+            <div class="code-input-container">
+                <input type="text" class="code-box" maxlength="1">
+                <input type="text" class="code-box" maxlength="1">
+                <input type="text" class="code-box" maxlength="1">
+                <input type="text" class="code-box" maxlength="1">
+                <input type="text" class="code-box" maxlength="1">
+                <input type="text" class="code-box" maxlength="1">
+            </div>
+            <p class="message" id="code-message"></p>
+            <p>Attempts left: <span id="attempts-left">3</span></p>
+            <p>Resend code in: <span id="resend-countdown" class="countdown">120</span>s</p>
+            <button id="verify-code-button" disabled>Verify Code</button>
+            <button id="resend-code-button" style="margin-top: 10px;">Resend Code</button>
+        </div>
+
+        <div id="set-new-password-section" style="display: none;">
+            <p>Enter and confirm your new password.</p>
+            <div class="form-group">
+                <label for="new-password">New Password:</label>
+                <input type="password" id="new-password" name="new-password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm New Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div>
+            <button id="reset-password-button" disabled>Reset Password</button>
+            <p class="message" id="reset-message"></p>
+        </div>
+
+        <div id="page-disabled-overlay" class="disabled-overlay" style="display: none;">
+            <p>This page has been disabled due to security concerns or too many failed attempts.</p>
+            <p>Please try again later or contact support.</p>
+            <p>Time remaining: <span id="disabled-countdown"></span></p>
+        </div>
+
+        <p style="margin-top: 20px;"><a href="/login">Back to Login</a></p>
+    </div>
+
+    <script src="../Cobutechjs/cobufp.js"></script>
+</body>
+</html>
