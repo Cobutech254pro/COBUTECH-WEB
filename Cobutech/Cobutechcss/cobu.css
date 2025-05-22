@@ -1,47 +1,41 @@
-/* Cobutechcss/cobu.css */
+
 body {
     margin: 0;
-    overflow: hidden; /* Prevent scrollbars */
+    overflow: hidden; 
 }
-
 .background-image {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../../Cobutech/Cobutechimages/cbu.jpg'); /* Path to your image */
-    background-size: cover; /* Cover the entire background */
-    background-position: center; /* Center the image */
-    z-index: -1; /* Place behind other content */
-    opacity: 0; /* Initially hidden */
-    transition: opacity 2s ease-in-out; /* Fade in */
+    background-image: url('../../Cobutech/Cobutechimages/cbu.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    z-index: -1;
+    opacity: 0; 
+    transition: opacity 2s ease-in-out; 
 }
-
 .background-image.visible {
     opacity: 1;
 }
-
 .overlay {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Center vertically */
-    color: white; /* Text color */
+    height: 100vh; 
+    color: white; 
     font-weight: bold;
     text-align: center;
 }
-
 .title-top {
-    font-size: 2em; /* Adjust size as needed */
+    font-size: 2em; 
     margin-bottom: 0.5em;
 }
-
 .title-bottom {
-    font-size: 1.5em; /* Adjust size as needed */
+    font-size: 1.5em;
 }
-
 .copyright {
     position: absolute;
     bottom: 10px;
