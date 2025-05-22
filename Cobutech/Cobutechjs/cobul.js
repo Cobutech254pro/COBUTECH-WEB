@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 // --- Fetch API call to backend signin endpoint ---
-                const response = await fetch('/api/auth/signin', {
+                const response = await fetch('/api/auth/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
