@@ -1,127 +1,91 @@
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('cobuv.js script loaded and DOMContentLoaded event fired.'); // Debugging: Confirm script loads
-
+Document.addEventListener('DOMContentLoaded', function() {
     const codeBoxes = document.querySelectorAll('.code-box');
     const resendButton = document.getElementById('resend-code-button');
     const resendCountdownElement = document.getElementById('resend-countdown');
     const attemptsLeftElement = document.getElementById('attempts-left');
     const waitMessageElement = document.getElementById('wait-message');
     const waitCountdownElement = document.getElementById('wait-countdown');
-    const verifyButton = document.getElementById('verify-button');
-    // Ensure this element exists in your HTML, or it will be null and cause errors later
-    const codeBoxesContainer = document.querySelector('.code-boxes-container');
+    const verifyButton = document.getElementById('verify-button'); // Get the Verify button
 
     let attempts = 3;
     let resendAvailableIn = 20;
-    let resendInterval = null; // Initialize to null
+    let resendInterval;
     let waitPeriod = 24 * 60 * 60; // 24 hours in seconds
-    let waitInterval = null; // Initialize to null
+    let waitInterval;
     let canRequestCode = true;
-    let verificationBlocked = false;
-    const email = localStorage.getItem('verificationEmail');
+    let verificationBlocked = false; // Flag to track if verification is blocked
+    const email = localStorage.getItem('verificationEmail'); // Get email from localStorage
 
     if (!email) {
         alert('Email not found. Please sign up again.');
-        window.location.href = '/';
-        return; // Important: Stop execution if email is not found
+        window.location.href = '/'; // Redirect to signup page
     }
-
-    // Focus on the first input box on load
-    if (codeBoxes.length > 0) {
-        codeBoxes[0].focus();
-    }
-
-    // Function to update attempt count display and handle blocking
+    codeBoxes[0].focus();
     function updateAttempts() {
-        if (attemptsLeftElement) { // Ensure element exists before updating
-            attemptsLeftElement.textContent = `Attempts left: ${attempts}`;
-        }
-
+        attemptsLeftElement.textContent = `Attempts left: ${attempts}`;
         if (attempts === 0 && !verificationBlocked) {
             verificationBlocked = true;
             canRequestCode = false;
-            if (resendButton) resendButton.disabled = true;
-            if (document.getElementById('request-code-message')) {
-                document.getElementById('request-code-message').style.display = 'none';
-            }
-            if (waitMessageElement) waitMessageElement.style.display = 'block';
-            if (codeBoxesContainer) codeBoxesContainer.style.display = 'none';
-
+            resendButton.disabled = true;
+            document.getElementById('request-code-message').style.display = 'none';
+            waitMessageElement.style.display = 'block';
+            codeBoxesContainer.style.display = 'none'; 
             const blockedSymbol = document.createElement('div');
             blockedSymbol.textContent = '⛔';
             blockedSymbol.style.fontSize = '5em';
-            blockedSymbol.style.color = 'red';
-            if (codeBoxesContainer && codeBoxesContainer.parentNode) {
-                codeBoxesContainer.parentNode.insertBefore(blockedSymbol, codeBoxesContainer);
-            }
+            blockedSymbol.color = 'red';
+            codeBoxesContainer.parentNode.insertBefore(blockedSymbol, codeBoxesContainer);
             startWaitCountdown();
         }
     }
-
-    // Function to start the resend countdown
     function startResendCountdown() {
-        console.log('startResendCountdown called.'); 
-        if (resendButton) resendButton.disabled = true;
+        resendButton.disabled = true;
         resendAvailableIn = 20;
-        if (resendCountdownElement) resendCountdownElement.textContent = resendAvailableIn;
-        if (document.getElementById('request-code-message')) {
-            document.getElementById('request-code-message').style.display = 'block';
-        }
-        if (resendInterval) {
-            clearInterval(resendInterval);
-        }
-
+        resendCountdownElement.textContent = resendAvailableIn;
+        document.getElementById('request-code-message').style.display = 'block';
         resendInterval = setInterval(() => {
             resendAvailableIn--;
-            if (resendCountdownElement) resendCountdownElement.textContent = resendAvailableIn;
-            if (resendAvailableIn <= 0 && canRequestCode) { 
+            resendCountdownElement.textContent = resendAvailableIn;
+            if (resendAvailableIn === 0 && canRequestCode) {
                 clearInterval(resendInterval);
-                if (resendButton) resendButton.disabled = false;
-                if (resendCountdownElement) resendCountdownElement.textContent = "Ready";
-                resendInterval = null; /
-                console.log('Resend countdown finished.'); 
+                resendButton.disabled = false;
+                resendCountdownElement.textContent = "Ready";
             }
         }, 1000);
     }
     function startWaitCountdown() {
-        console.log('startWaitCountdown called.'); 
         let remainingTime = waitPeriod;
-        if (waitCountdownElement) waitCountdownElement.textContent = formatTime(remainingTime);
-
-        if (waitInterval) { 
-            clearInterval(waitInterval);
-        }
-
+        waitCountdownElement.textContent = formatTime(remainingTime);
         waitInterval = setInterval(() => {
             remainingTime--;
-            if (waitCountdownElement) waitCountdownElement.textContent = formatTime(remainingTime);
+            waitCountdownElement.textContent = formatTime(remainingTime);
             if (remainingTime <= 0) {
                 clearInterval(waitInterval);
-                attempts = 3; 
+                attempts = 3;
                 canRequestCode = true;
                 verificationBlocked = false;
-                updateAttempts(); 
-                if (waitMessageElement) waitMessageElement.style.display = 'none';
-                if (document.getElementById('request-code-message')) {
-                    document.getElementById('request-code-message').style.display = 'block';
-                }
-                if (codeBoxesContainer) codeBoxesContainer.style.display = 'flex';
+                updateAttempts();
+                waitMessageElement.style.display = 'none';
+                document.getElementById('request-code-message').style.display = 'block';
+                codeBoxesContainer.style.display = 'flex'; // Show the input boxes again
                 const blockedSymbol = codeBoxesContainer.parentNode.querySelector('div');
                 if (blockedSymbol && blockedSymbol.textContent === '⛔') {
-                    blockedSymbol.remove();
+                    blockedSymbol.remove(); // Remove the blocked symbol
                 }
                 startResendCountdown();
-                waitInterval = null; 
-                console.log('Wait countdown finished, verification re-enabled.'); // Debugging
             }
         }, 1000);
     }
+
+    // Helper function to format time (HH:MM:SS)
     function formatTime(totalSeconds) {
         const hours = Math.floor(totalSeconds / 3600);
         const minutes = Math.floor((totalSeconds % 3600) / 60);
         const seconds = totalSeconds % 60;
         return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
     }
+
+    // Event listener for input in the code boxes
     codeBoxes.forEach((box, index) => {
         box.addEventListener('input', function() {
             const currentBox = this;
@@ -130,27 +94,33 @@ document.addEventListener('DOMContentLoaded', function() {
             if (currentBox.value.length === 1 && nextBox) {
                 nextBox.focus();
             }
+
+            // If all boxes are filled, enable the verify button
             const enteredCode = Array.from(codeBoxes)
                 .map(box => box.value)
                 .join('');
-            if (verifyButton) {
-                verifyButton.disabled = enteredCode.length !== 6 || verificationBlocked;
-            }
+
+            verifyButton.disabled = enteredCode.length !== 6 || verificationBlocked;
         });
+
+        // Prevent non-numeric input
         box.addEventListener('keypress', function(event) {
             const charCode = (event.which) ? event.which : event.keyCode;
             if (charCode < 48 || charCode > 57) {
                 event.preventDefault();
             }
         });
+
+        // Allow backspace to move to the previous box
         box.addEventListener('keydown', function(event) {
             if (event.key === 'Backspace' && this.value.length === 0 && index > 0) {
                 codeBoxes[index - 1].focus();
             }
         });
     });
+
+    // Function to handle code verification API call
     function verifyCode(enteredCode) {
-        console.log('Verifying code:', enteredCode, 'for email:', email); 
         fetch('/api/auth/verify-code', {
             method: 'POST',
             headers: {
@@ -168,16 +138,15 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(data => {
             alert(data.message || 'Email verified successfully!');
-            localStorage.removeItem('verificationEmail')
-            window.location.href = '../../../Cobutech/Cobutechhtml/cobup.html';
+            localStorage.removeItem('verificationEmail'); // Clean up local storage
+            window.location.href = '../../../Cobutech/Cobutechtml/cobup.html'; // Redirect to dashboard
         })
         .catch(error => {
-            console.error('Error during verification fetch:', error); 
             alert(error.message);
             if (error.message.includes('expired')) {
-                console.log('Code expired, re-enabling resend button.'); 
-                if (resendButton) resendButton.disabled = false;
-                if (resendCountdownElement) resendCountdownElement.textContent = "Ready";
+                // Enable resend button immediately if the code expired
+                resendButton.disabled = false;
+                resendCountdownElement.textContent = "Ready";
                 clearInterval(resendInterval);
             } else {
                 codeBoxes.forEach(box => box.classList.add('incorrect'));
@@ -188,67 +157,130 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, 1000);
                 attempts--;
                 updateAttempts();
-                console.log('Incorrect code attempt. Attempts left:', attempts); // Debugging
             }
         });
     }
-    if (resendButton) { 
-        resendButton.addEventListener('click', function() {
-            console.log('Resend button clicked. canRequestCode:', canRequestCode); // Debugging
-            if (canRequestCode) {
-                fetch('/api/auth/resend-verification-code', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email: email }),
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        return response.json().then(error => {
-                            throw new Error(error.message || 'Failed to resend code');
-                        });
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    alert(data.message || 'New verification code sent to your email.');
-                    startResendCountdown(); 
-                    codeBoxes.forEach(box => box.value = ''); 
-                    if (codeBoxes.length > 0) {
-                        codeBoxes[0].focus();
-                    }
-                    console.log('Resend request successful, starting countdown.'); 
-                })
-                .catch(error => {
-                    console.error('Error during resend fetch:', error); 
-                    alert(error.message);
-                    if (resendButton) resendButton.disabled = false;
-                    if (resendCountdownElement) resendCountdownElement.textContent = "Try again";
-                    clearInterval(resendInterval);
-                });
-            } else {
-                console.log('Cannot request code, cooldown in progress or blocked.');
-            }
-        });
-    }
-    if (verifyButton) { 
-        verifyButton.addEventListener('click', function() {
-            console.log('Verify button clicked.'); // Debugging
-            const enteredCode = Array.from(codeBoxes)
-                .map(box => box.value)
-                .join('');
 
-            if (enteredCode.length === 6 && !verificationBlocked) {
-                verifyCode(enteredCode);
-            } else if (!verificationBlocked) {
-                alert('Please enter the 6-digit code.');
-            } else {
-                alert('Verification is currently blocked. Please wait.');
-            }
-        });
-    }
-    if (verifyButton) verifyButton.disabled = true; /
-    startResendCountdown(); 
-    updateAttempts();
+    // Event listener for resend code button
+    resendButton.addEventListener('click', function() {
+        if (canRequestCode) {
+            fetch('/api/auth/resend-verification-code', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: email }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(error => {
+                        throw new Error(error.message || 'Failed to resend code');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert(data.message || 'New verification code sent to your email.');
+                startResendCountdown();
+                // Optionally clear the input boxes
+                codeBoxes.forEach(box => box.value = '');
+                codeBoxes[0].focus();
+            })
+            .catch(error => {
+                alert(error.message);
+            });
+
+            // Disable the button and start the countdown
+            resendButton.disabled = true;
+            resendAvailableIn = 20;
+            resendCountdownElement.textContent = resendAvailableIn;
+            document.getElementById('request-code-message').style.display = 'block';
+            clearInterval(resendInterval); // Clear any existing interval
+            resendInterval = setInterval(() => {
+                resendAvailableIn--;
+                resendCountdownElement.textContent = resendAvailableIn;
+                if (resendAvailableIn === 0) {
+                    clearInterval(resendInterval);
+                    resendButton.disabled = false;
+                    resendCountdownElement.textContent = "Ready";
+                }
+            }, 1000);
+        }
+    });
+
+    // Event listener for the Verify button
+    verifyButton.addEventListener('click', function() {
+        const enteredCode = Array.from(codeBoxes)
+            .map(box => box.value)
+            .join('');
+
+        if (enteredCode.length === 6 && !verificationBlocked) {
+            verifyCode(enteredCode);
+        } else if (!verificationBlocked) {
+            alert('Please enter the 6-digit code.');
+        }
+    });
+
+    // Disable verify button initially
+    verifyButton.disabled = true;
+
+    // Start the initial resend countdown
+    startResendCountdown();
 });
+                    
+
+
+const db = require('../cobudb'); // Adjust path as needed
+
+const handleVerifyCode = (app) => {
+    app.post('/api/auth/verify-code', async (req, res) => {
+        const { email, code } = req.body; // Expecting email and the verification code from the frontend
+
+        if (!email || !code) {
+            return res.status(400).json({ message: 'Please provide email and verification code.' });
+        }
+
+        try {
+            // 1. Find the user by email
+            const userResult = await db.query(
+                'SELECT * FROM users WHERE email = $1',
+                [email]
+            );
+
+            if (userResult.rows.length === 0) {
+                return res.status(404).json({ message: 'User not found.' });
+            }
+
+            const user = userResult.rows[0];
+
+            // 2. Check if the provided code matches the stored verification_code
+            if (code !== user.verification_code) {
+                return res.status(400).json({ message: 'Invalid verification code.' });
+            }
+
+            // 3. Check if the verification code has expired
+            const now = new Date();
+            const expiryTime = new Date(user.verification_code_expiry);
+
+            if (now > expiryTime) {
+                // Optionally, you might want to allow the user to request a new code here
+                return res.status(400).json({ message: 'Verification code has expired.' });
+            }
+
+            // 4. Update the user's is_verified status to TRUE
+            await db.query(
+                'UPDATE users SET is_verified = TRUE, verification_code = NULL, verification_code_expiry = NULL WHERE email = $1',
+                [email]
+            );
+
+            // 5. Send a success response
+            res.status(200).json({ message: 'Email verified successfully!' });
+
+        } catch (error) {
+            console.error('Error during verification:', error);
+            res.status(500).json({ message: 'An error occurred during verification.' });
+        }
+    });
+};
+
+module.exports = handleVerifyCode
