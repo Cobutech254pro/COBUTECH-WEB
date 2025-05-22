@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
             resendInterval = setInterval(() => {
                 resendAvailableIn--;
                 resendCountdownElement.textContent = resendAvailableIn;
-                if (resendAvailableIn === 0) {
+                if (resendAvailableIn <= 0) {
                     clearInterval(resendInterval);
                     resendButton.disabled = false;
                     resendCountdownElement.textContent = "Ready";
