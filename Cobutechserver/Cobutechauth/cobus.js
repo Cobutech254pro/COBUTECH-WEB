@@ -14,7 +14,7 @@ const handleSignup = (app, jwtSecret) => {
                 if (!user.is_verified) {
                     console.log(`Unverified user found: ${email}. Updating details and resending verification email.`);
                     const newVerificationCode = Math.floor(100000 + Math.random() * 900000).toString();
-                    const newExpiryTime = new Date(Date.now() + 120000); /
+                    const newExpiryTime = new Date(Date.now() + 120000); 
                     const hashedPassword = await bcrypt.hash(password, 10); 
                     await db.query(
                         `UPDATE users
