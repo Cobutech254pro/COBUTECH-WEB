@@ -1,7 +1,6 @@
-/* Cobutechcss/cobus.css (Updated - Includes Sign-in Styles) */
 body {
     margin: 0;
-    background-color: #222; /* Dark background */
+    background-color: #222; 
     color: white;
     font-family: sans-serif;
     display: flex;
@@ -9,7 +8,6 @@ body {
     align-items: center;
     min-height: 100vh;
 }
-
 .signin-container {
     background-color: #333;
     padding: 30px;
@@ -19,24 +17,20 @@ body {
     max-width: 90%;
     text-align: center;
 }
-
 h1 {
-    color: #e0f7fa; /* Light blue heading */
+    color: #e0f7fa; 
     margin-bottom: 20px;
 }
-
 .form-group {
     margin-bottom: 20px;
     text-align: left;
 }
-
 label {
     display: block;
-    color: #a7ffeb; /* Light green label */
+    color: #a7ffeb; 
     margin-bottom: 5px;
     font-weight: bold;
 }
-
 input[type="text"],
 input[type="email"],
 input[type="password"] {
@@ -46,9 +40,8 @@ input[type="password"] {
     border-radius: 4px;
     background-color: #444;
     color: white;
-    box-sizing: border-box; /* Prevent padding from increasing the input's width */
+    box-sizing: border-box; 
 }
-
 .purple-button {
     display: block;
     width: 100%;
@@ -63,53 +56,41 @@ input[type="password"] {
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
-
 .purple-button:hover {
-    background-color: #8a2be2; /* Slightly lighter purple on hover */
+    background-color: #8a2be2; 
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
 }
-
 .link-to-login {
     margin-top: 20px;
     font-size: 0.9em;
     color: #ccc;
 }
-
 .link-to-login a {
-    color: #ffab91; /* Light orange link */
+    color: #ffab91; 
     text-decoration: none;
 }
-
 .link-to-login a:hover {
     text-decoration: underline;
 }
-
-/* --- Specific Styles for Sign-in Page --- */
 .hidden {
     display: none !important;
 }
-
 .slide-in-right {
     transform: translateX(100%);
     opacity: 0;
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
-
 .slide-in-right.active {
     transform: translateX(0);
     opacity: 1;
 }
-
 .password-input-container {
     position: relative;
     display: flex;
     align-items: center;
 }
-
 .password-input-container input[type="password"] {
-    padding-right: 35px; /* Make space for the toggle button */
-}
-
+    padding-right: 35px; 
 .password-input-container button#toggle-password {
     position: absolute;
     right: 5px;
@@ -119,33 +100,26 @@ input[type="password"] {
     font-size: 1em;
     outline: none;
 }
-
 #password-strength {
     margin-top: 5px;
     font-size: 0.8em;
 }
-
 #password-strength.weak {
     color: red;
 }
-
 #password-strength.medium {
     color: yellow;
 }
-
 #password-strength.strong {
     color: green;
 }
-
 #password-match {
     margin-top: 5px;
     font-size: 0.8em;
 }
-
 #password-match.match {
     color: green;
 }
-
 #password-match.mismatch {
     color: red;
 }
@@ -211,11 +185,7 @@ input[type="password"] {
 .social-button.github {
     background-color: #333;
 }
-/* Cobutechcss/signin.css (Simplified - For Sign-in Page Specific Overrides) */
-
-/* You might add any sign-in page specific styles here that override the global ones */
 .signin-container {
-    /* Example of an override if needed */
-    /* background-color: #444; */
 }
+    
 
