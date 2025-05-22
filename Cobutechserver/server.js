@@ -10,7 +10,7 @@ const handleSignup = require('./Cobutechauth/cobus');
 const handleSignin = require('./Cobutechauth/cobusn.js');
 const handleVerifyCode = require('./Cobutechauth/cobuv'); // This handler
 const handleResendVerificationCode  = require('./Cobutechauth/cobuvr'); // This handler
-const handleLogingin = require('./Cobutechauth/cobul');
+const handleLogin = require('./Cobutechauth/cobul');
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -34,7 +34,7 @@ handleSignup(app, jwtSecret);
 handleSignin(app, jwtSecret);
 handleVerifyCode(app, jwtSecret); // <--- UPDATED: Passing jwtSecret
 handleResendVerificationCode(app, jwtSecret); // <--- UPDATED: Passing jwtSecret
-handleLogingin(app, jwtSecret);
+handleLogin(app, jwtSecret);
 // Start the server
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
