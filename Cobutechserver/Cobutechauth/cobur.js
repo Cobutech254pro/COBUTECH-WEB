@@ -35,4 +35,4 @@ const handleResendVerificationCode = (app) => {
     });
 };
 module.exports = handleResendVerificationCode;
-//COBU-TECH
+
