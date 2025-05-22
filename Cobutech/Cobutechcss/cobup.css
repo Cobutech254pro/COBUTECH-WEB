@@ -1,15 +1,12 @@
-/* Basic styles for the prompts - place this in your CSS folder */
-
 .prompts-container {
     background-color: #f8f9fa;
     border-radius: 8px;
     padding: 20px;
-    margin: 20px auto; /* Center the container */
+    margin: 20px auto; 
     max-width: 800px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: sans-serif; /* Ensure font-family is consistent across your app */
+    font-family: sans-serif; 
 }
-
 .prompts-container h2 {
     color: #333;
     margin-bottom: 25px;
@@ -18,7 +15,6 @@
     border-bottom: 2px solid #eee;
     padding-bottom: 15px;
 }
-
 .prompt-card {
     display: flex;
     align-items: center;
@@ -30,40 +26,33 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
 .prompt-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-
 .prompt-icon {
     font-size: 2em;
     margin-right: 15px;
-    color: #007bff; /* Primary blue color - adjust to your brand color */
+    color: #007bff; 
 }
-
 .prompt-content {
     flex-grow: 1;
 }
-
 .prompt-content h3 {
     margin: 0 0 5px 0;
     color: #333;
     font-size: 1.1em;
 }
-
 .prompt-content p {
     margin: 0;
     color: #666;
     font-size: 0.9em;
 }
-
 .prompt-action {
     margin-left: 20px;
 }
-
 .prompt-action button {
-    background-color: #28a745; /* Green for action button - adjust to your brand color */
+    background-color: #28a745; 
     color: white;
     border: none;
     border-radius: 5px;
@@ -72,17 +61,14 @@
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
-
 .prompt-action button:hover {
-    background-color: #218838; /* Darker green on hover */
+    background-color: #218838; 
 }
-
-/* Styling for dismissed prompts (optional) */
 .prompt-card.dismissed {
     opacity: 0.6;
     text-decoration: line-through;
 }
 .prompt-card.dismissed .prompt-action button {
-    background-color: #ccc; /* Grey out button for dismissed prompts */
+    background-color: #ccc; 
     cursor: not-allowed;
 }
