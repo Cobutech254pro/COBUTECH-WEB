@@ -6,7 +6,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-image: url:('../../../Cobutech/Cobutechimages/cobuv.jpeg'); 
+    background-image: url('../../Cobutech/Cobutechimages/cobuv.jpeg');  
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat; 
