@@ -3,7 +3,8 @@ const bcrypt = require('bcrypt');
 const db = require('../cobudb'); // Ensure this path is correct
 const sendVerificationEmail = require('../Cobutechutils/cobuut.js'); // Ensure this path is correct
 
-const handleSignup = (app) => {
+// UPDATED: Added jwtSecret to the parameter list
+const handleSignup = (app, jwtSecret) => { // <--- ADDED jwtSecret here
     app.post('/api/auth/signup', async (req, res) => {
         const { username, email, password } = req.body;
 
@@ -13,7 +14,8 @@ const handleSignup = (app) => {
 
         try {
             // Check if user already exists by email
-            const existingUserResult = await db.query('SELECT user_id, is_verified FROM users WHERE email = $1', [email]);
+            const existingUserResult = await db.query('SELECT user_id, is_verified, verification_code FROM users WHERE email = $1', [email]);
+            // ADDED: Select verification_code to reuse if user is unverified
 
             if (existingUserResult.rows.length > 0) {
                 const user = existingUserResult.rows[0];
@@ -23,6 +25,8 @@ const handleSignup = (app) => {
                     // Update user's details, resend verification code, and guide to verification.
                     console.log(`Unverified user found: ${email}. Updating details and resending verification email.`);
 
+                    // Option 1: Reuse existing verification code if it's recent enough, or generate new.
+                    // For simplicity, let's always generate a new one if they're re-registering unverified.
                     const newVerificationCode = Math.floor(100000 + Math.random() * 900000).toString();
                     const newExpiryTime = new Date(Date.now() + 120000); // 2 minutes from now
                     const hashedPassword = await bcrypt.hash(password, 10); // Re-hash new password
