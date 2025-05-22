@@ -1,13 +1,13 @@
-// Cobutechauth/cobusn.js
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const db = require('../cobudb');
+const db = require('../cobudb'); // Ensure this path is correct relative to cobusn.js
 
-// MODIFIED: Accept jwtSecret as a parameter
-const handleSignin = (app, jwtSecret) => { // <--- Added jwtSecret parameter here
+// Renamed function to handleLogin
+const handleLogin = (app, jwtSecret) => {
+    // Renamed endpoint to /api/auth/login
     app.post('/api/auth/login', async (req, res) => {
         // --- Debugging: Log incoming request body ---
-        console.log('--- SIGNIN ATTEMPT ---');
+        console.log('--- LOGIN ATTEMPT (Backend) ---'); // Renamed from SIGNIN ATTEMPT
         console.log('Received login request body:', req.body);
         const { email, password } = req.body;
 
@@ -16,7 +16,7 @@ const handleSignin = (app, jwtSecret) => { // <--- Added jwtSecret parameter her
         const cleanedPassword = password ? password.trim() : '';
 
         console.log('Cleaned Email:', cleanedEmail);
-        console.log('Cleaned Password (first 5 chars):', cleanedPassword.substring(0, 5) + '...'); // Log partial password for safety
+        console.log('Cleaned Password (first 5 chars):', cleanedPassword.substring(0, 5) + '...');
 
         if (!cleanedEmail || !cleanedPassword) {
             console.log('Error: Missing email or password in request.');
@@ -26,7 +26,7 @@ const handleSignin = (app, jwtSecret) => { // <--- Added jwtSecret parameter her
         try {
             const userResult = await db.query(
                 'SELECT user_id, username, email, password_hash, is_verified, verification_code_expiry FROM users WHERE email = $1',
-                [cleanedEmail] // <--- Use cleaned email for database query
+                [cleanedEmail]
             );
 
             // --- Debugging: Log database query result ---
@@ -45,7 +45,7 @@ const handleSignin = (app, jwtSecret) => { // <--- Added jwtSecret parameter her
                 username: user.username,
                 email: user.email,
                 is_verified: user.is_verified,
-                password_hash_prefix: user.password_hash.substring(0, 10) + '...' // Log prefix of hash
+                password_hash_prefix: user.password_hash.substring(0, 10) + '...'
             });
 
             // --- Verification Status Check ---
@@ -53,7 +53,10 @@ const handleSignin = (app, jwtSecret) => { // <--- Added jwtSecret parameter her
                 console.log('User email not verified:', user.email);
                 return res.status(403).json({
                     message: 'Your email is not verified. Please check your email for the verification code.',
-                    email: user.email
+                    email: user.email,
+                    user: { // Ensure 'user' object is included for frontend to check is_verified
+                        is_verified: false
+                    }
                 });
             }
 
@@ -62,7 +65,7 @@ const handleSignin = (app, jwtSecret) => { // <--- Added jwtSecret parameter her
             console.log('Input password (cleaned, partial):', cleanedPassword.substring(0, 5) + '...');
             console.log('Stored hash (partial):', user.password_hash.substring(0, 10) + '...');
 
-            const passwordMatch = await bcrypt.compare(cleanedPassword, user.password_hash); // <--- Use cleaned password
+            const passwordMatch = await bcrypt.compare(cleanedPassword, user.password_hash);
 
             console.log('Password comparison result (passwordMatch):', passwordMatch);
 
@@ -77,7 +80,7 @@ const handleSignin = (app, jwtSecret) => { // <--- Added jwtSecret parameter her
             // --- JWT Generation ---
             const token = jwt.sign(
                 { userId: user.user_id, email: user.email, username: user.username },
-                jwtSecret, // <--- Use the jwtSecret passed as a parameter
+                jwtSecret,
                 { expiresIn: '1h' }
             );
 
@@ -93,10 +96,10 @@ const handleSignin = (app, jwtSecret) => { // <--- Added jwtSecret parameter her
             });
 
         } catch (error) {
-            console.error('CRITICAL ERROR during sign-in process:', error);
-            res.status(500).json({ message: 'An internal server error occurred during sign-in.' });
+            console.error('CRITICAL ERROR during login process:', error); // Renamed from sign-in process
+            res.status(500).json({ message: 'An internal server error occurred during login.' }); // Renamed from sign-in
         }
     });
 };
 
-module.exports = handleLogin;
+module.exports = handleLogin; // This exports the handleLogin function
