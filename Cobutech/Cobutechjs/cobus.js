@@ -1,23 +1,15 @@
-// public/Cobutech/Cobutechjs/cobus.js
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Step 1 & 2 Transition Elements (assuming your signup form is multi-step) ---
     const step1 = document.getElementById('step-1');
     const step2 = document.getElementById('step-2');
     const nextButton = document.getElementById('next-step');
-
-    // --- Password Related Elements ---
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirm-password');
     const passwordStrengthDiv = document.getElementById('password-strength');
     const passwordMatchDiv = document.getElementById('password-match');
     const togglePasswordButton = document.getElementById('toggle-password');
-
-    // --- Form & Submission Elements ---
-    const signupForm = document.getElementById('signup-form'); // Assumed ID for your signup form
+    const signupForm = document.getElementById('signup-form'); 
     const termsCheckbox = document.getElementById('terms');
-    const submitButton = step2 ? step2.querySelector('button[type="submit"]') : null; // Get submit button from step2
-
-    // --- Event Listeners for Multi-Step Form (if applicable) ---
+    const submitButton = step2 ? step2.querySelector('button[type="submit"]') : null;
     if (nextButton && step1 && step2) {
         nextButton.addEventListener('click', () => {
             step1.classList.add('hidden');
@@ -27,8 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 50);
         });
     }
-
-    // --- Password Toggle ---
     if (togglePasswordButton && passwordInput) {
         togglePasswordButton.addEventListener('click', () => {
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
@@ -37,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Password Strength Check ---
     if (passwordInput && passwordStrengthDiv) {
         passwordInput.addEventListener('input', () => {
             const password = passwordInput.value;
@@ -52,8 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
             enableSubmitIfConditionsMet();
         });
     }
-
-    // --- Password Match Check ---
     if (confirmPasswordInput && passwordInput && passwordMatchDiv) {
         confirmPasswordInput.addEventListener('input', () => {
             if (passwordInput.value === confirmPasswordInput.value) {
@@ -66,18 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
             enableSubmitIfConditionsMet();
         });
     }
-
-    // --- Terms Checkbox ---
     if (termsCheckbox) {
         termsCheckbox.addEventListener('change', () => {
             enableSubmitIfConditionsMet();
         });
     }
-
-    // --- Enable/Disable Submit Button Logic ---
     function enableSubmitIfConditionsMet() {
         if (submitButton && passwordInput && confirmPasswordInput && termsCheckbox) {
-            // Check if passwords match, terms are checked, and password is not empty
             if (passwordInput.value === confirmPasswordInput.value && termsCheckbox.checked && passwordInput.value.length > 0) {
                 submitButton.removeAttribute('disabled');
             } else {
@@ -85,16 +67,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-
-    // --- Main Signup Form Submission Logic ---
-    if (signupForm) { // Ensure the form element exists
+    if (signupForm) { 
         signupForm.addEventListener('submit', async (event) => {
-            event.preventDefault(); // Prevent default form submission
-
+            event.preventDefault();
             const username = document.getElementById('username').value;
             const email = document.getElementById('email').value;
             const password = passwordInput.value;
-
             try {
                 const response = await fetch('/api/auth/signup', {
                     method: 'POST',
