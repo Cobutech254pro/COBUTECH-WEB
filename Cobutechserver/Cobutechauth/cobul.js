@@ -38,7 +38,7 @@ const handleLogin = (app, jwtSecret) => {
                 return res.status(403).json({
                     message: 'Your email is not verified. Please check your email for the verification code.',
                     email: user.email,
-                    usER {
+                    user {
                         is_verified: false
                     }
                 });
