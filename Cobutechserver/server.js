@@ -34,7 +34,7 @@ handleSignup(app, jwtSecret);
 handleSignin(app, jwtSecret);
 handleVerifyCode(app, jwtSecret); // <--- UPDATED: Passing jwtSecret
 handleResendVerificationCode(app, jwtSecret); // <--- UPDATED: Passing jwtSecret
-handleSignup(app, jwtSecret);
+handleLogingin(app, jwtSecret);
 // Start the server
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
