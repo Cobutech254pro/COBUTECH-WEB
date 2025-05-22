@@ -1,4 +1,4 @@
-Document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const step1 = document.getElementById('step-1');
     const step2 = document.getElementById('step-2');
     const nextButton = document.getElementById('next-step');
