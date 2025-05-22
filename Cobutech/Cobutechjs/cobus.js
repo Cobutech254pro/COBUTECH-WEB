@@ -60,25 +60,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const email = document.getElementById('email').value;
         const password = passwordInput.value;
         try {
-            const response = await fetch('/api/auth/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, email, password }),
-            });
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Sign-up failed');
-            }
-            const data = await response.json();
-            console.log('Success:', data);
-            alert(data.message || 'Sign-up successful. Please check your email for verification.');
-            localStorage.setItem('verificationEmail', email);
-            window.location.href = '../../../Cobutech/Cobutechhtml/cobuv.html';
-        } catch (error) {
-            console.error('Error:', error);
-            alert(error.message || 'Network error or sign-up failed');
+        const response =
+            await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, email, password }),
+    });
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message || 'Sign-up failed');
+    }
+    console.log('Success:', data);
+    alert(data.message || 'Sign-up successful. Please check your email for verification.');
+    localStorage.setItem('verificationEmail', email);
+    if (data.redirectToVerification) {
+        window.location.href = '../../../Cobutech/Cobutechhtml/cobuv.html';
+    } else {
+        window.location.href = '../../../Cobutech/Cobutechhtml/cobuv.html';
+    }
+} catch (error) {
+    console.error('Error:', error);
+    alert(error.message || 'Network error or sign-up failed');
+        }
         }
     });
 });
