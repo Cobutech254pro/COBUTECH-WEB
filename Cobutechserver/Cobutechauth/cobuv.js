@@ -1,6 +1,6 @@
-const db = require('../cobudb'); 
-const handleVerifyCode = (app, jwtSecret) => { 
-    app.post('/api/auth/verify-code', async (req, res) => { 
+const db = require('../cobudb');
+const handleVerifyCode = (app, jwtSecret) => {
+    app.post('/api/auth/verify-code', async (req, res) => {
         const { email, verificationCode } = req.body;
         if (!email || !verificationCode) {
             return res.status(400).json({ message: 'Please provide email and verification code.' });
@@ -35,4 +35,4 @@ const handleVerifyCode = (app, jwtSecret) => {
         }
     });
 };
-module.exports = handleVerifyCode; 
+module.exports = handleVerifyCode;
