@@ -1,6 +1,6 @@
 const db = require('../cobudb'); 
 const bcrypt = require('bcrypt');
-const sendVerificationEmail = require('../../Cobutechutils/cobuut.js');
+const sendVerificationEmail = require('../Cobutechutils/cobuut.js');
 const handleForgotPasswordReset = (app) => {
     app.post('/api/auth/request-password-reset-code', async (req, res) => {
         console.log('--- PASSWORD RESET CODE REQUEST (Backend) ---');
