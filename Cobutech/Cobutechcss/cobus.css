@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-color: #222; 
+    background-color: #222;
     color: white;
     font-family: sans-serif;
     display: flex;
@@ -18,7 +18,7 @@ body {
     text-align: center;
 }
 h1 {
-    color: #e0f7fa; 
+    color: #e0f7fa;
     margin-bottom: 20px;
 }
 .form-group {
@@ -27,7 +27,7 @@ h1 {
 }
 label {
     display: block;
-    color: #a7ffeb; 
+    color: #a7ffeb;
     margin-bottom: 5px;
     font-weight: bold;
 }
@@ -40,7 +40,7 @@ input[type="password"] {
     border-radius: 4px;
     background-color: #444;
     color: white;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 .purple-button {
     display: block;
@@ -57,7 +57,7 @@ input[type="password"] {
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 .purple-button:hover {
-    background-color: #8a2be2; 
+    background-color: #8a2be2;
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
 }
 .link-to-login {
@@ -66,7 +66,7 @@ input[type="password"] {
     color: #ccc;
 }
 .link-to-login a {
-    color: #ffab91; 
+    color: #ffab91;
     text-decoration: none;
 }
 .link-to-login a:hover {
@@ -90,7 +90,9 @@ input[type="password"] {
     align-items: center;
 }
 .password-input-container input[type="password"] {
-    padding-right: 35px; 
+    padding-right: 35px;
+}
+/* Fix for the missing closing brace here */
 .password-input-container button#toggle-password {
     position: absolute;
     right: 5px;
@@ -99,6 +101,7 @@ input[type="password"] {
     cursor: pointer;
     font-size: 1em;
     outline: none;
+    color: #ffab91; /* Added color for visibility */
 }
 #password-strength {
     margin-top: 5px;
@@ -185,7 +188,26 @@ input[type="password"] {
 .social-button.github {
     background-color: #333;
 }
-.signin-container {
-}
-    
 
+/* NEW: Styles for the status message */
+.status-message {
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px; /* Space above the message */
+    margin-bottom: 15px; /* Space below the message before "Already have an account?" */
+    font-weight: bold;
+    font-size: 0.95em;
+    text-align: center;
+}
+
+.status-message.success {
+    background-color: #d4edda; /* Light green */
+    color: #155724; /* Dark green text */
+    border: 1px solid #c3e6cb;
+}
+
+.status-message.error {
+    background-color: #f8d7da; /* Light red */
+    color: #721c24; /* Dark red text */
+    border: 1px solid #f5c6cb;
+}
