@@ -1,14 +1,14 @@
 const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_SERVICE,
-    port: process.env.EMAIL_PORT,
+    host: process.env.EMAIL_SERVICE, 
+    port: process.env.EMAIL_PORT,  
     secure: process.env.EMAIL_SECURE === 'true', 
     auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: process.env.EMAIL_USER, 
+        pass: process.env.EMAIL_PASS, 
     },
 });
-const sendVerificationEmail = async (email, code, type = 'account_verification') => { 
+const sendVerificationEmail = async (email, code, type = 'account_verification') => {
     let subject = '';
     let htmlContent = '';
     if (type === 'password_reset') {
@@ -21,7 +21,7 @@ const sendVerificationEmail = async (email, code, type = 'account_verification')
             <p>Thank you,</p>
             <p>The Cobutech Team</p>
         `;
-    } else { 
+    } else {
         subject = 'Your Cobutech Account Verification Code';
         htmlContent = `
             <p>Thank you for signing up for Cobu Tech Industry!</p>
