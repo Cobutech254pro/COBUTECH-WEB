@@ -2,38 +2,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
-    // Removed old loginMessage element as it's replaced
-    // const loginMessage = document.getElementById('login-message');
-    const statusMessageElement = document.getElementById('status-message'); // NEW: Get the message display element
+    const statusMessageElement = document.getElementById('status-message'); 
     const togglePasswordButton = document.getElementById('toggle-password');
-
-    // NEW: Function to display messages on the page
     function displayMessage(message, type) {
         statusMessageElement.textContent = message;
-        statusMessageElement.style.display = 'block'; // Make it visible
-        statusMessageElement.className = 'status-message'; // Reset classes
+        statusMessageElement.style.display = 'block'; 
+        statusMessageElement.className = 'status-message'; 
         if (type === 'success') {
             statusMessageElement.classList.add('success');
         } else if (type === 'error') {
             statusMessageElement.classList.add('error');
         }
-        // Optionally, hide the message after a few seconds
         setTimeout(() => {
             statusMessageElement.style.display = 'none';
             statusMessageElement.textContent = '';
-            statusMessageElement.className = 'status-message'; // Clear classes
-        }, 5000); // Message disappears after 5 seconds
+            statusMessageElement.className = 'status-message'; 
+        }, 5000); 
     }
-
-    // NEW: Function to clear messages
     function clearMessages() {
         statusMessageElement.style.display = 'none';
         statusMessageElement.textContent = '';
         statusMessageElement.className = 'status-message';
     }
-
-
-    // --- Password Toggle Functionality ---
     if (togglePasswordButton) {
         togglePasswordButton.addEventListener('click', () => {
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
@@ -41,41 +31,30 @@ document.addEventListener('DOMContentLoaded', () => {
             togglePasswordButton.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
         });
     }
-
-    // --- Login Form Submission Handler ---
     if (loginForm) {
         loginForm.addEventListener('submit', async (event) => {
-            event.preventDefault(); // Prevent default form submission
-            clearMessages(); // Clear any previous messages on submission
-
+            event.preventDefault();
+            clearMessages(); 
             const email = emailInput.value.trim();
             const password = passwordInput.value.trim();
-
-            // --- DEBUGGING LOGS (for Login Page) ---
             console.log('--- LOGIN ATTEMPT (Frontend) ---');
             console.log('Email value from input (raw):', emailInput.value);
             console.log('Password value from input (raw):', passwordInput.value);
             console.log('Trimmed Email:', email, ' (length:', email.length, ')');
             console.log('Trimmed Password (partial):', password.substring(0, 3) + '...', ' (length:', password.length, ')');
-            // --- END DEBUGGING LOGS ---
-
-            // --- Client-side validation ---
             if (!email) {
-                displayMessage('Please enter your email.', 'error'); // Use new display function
+                displayMessage('Please enter your email.', 'error');
                 return;
             }
             if (!password) {
-                displayMessage('Please enter your password.', 'error'); // Use new display function
+                displayMessage('Please enter your password.', 'error'); 
                 return;
             }
             if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
                 displayMessage('Please enter a valid email address.', 'error');
                 return;
             }
-
-
             try {
-                // --- Fetch API call to backend login endpoint ---
                 const response = await fetch('/api/auth/login', {
                     method: 'POST',
                     headers: {
@@ -85,18 +64,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 const data = await response.json();
-
-                // --- DEBUGGING LOGS (for Login Response) ---
                 console.log('Response from /api/auth/login (Status):', response.status);
                 console.log('Response data from /api/auth/login:', data);
-                // --- END DEBUGGING LOGS ---
-
-                if (response.ok) { // Check if HTTP status is 2xx
-                    displayMessage(data.message || 'Login successful!', 'success'); // Use new display function
-
+                if (response.ok) { 
+                    displayMessage(data.message || 'Login successful!', 'success'); 
                     if (data.token) {
-                        localStorage.setItem('authToken', data.token); // Store JWT
-                        localStorage.setItem('user', JSON.stringify(data.user)); // Store user data
+                        localStorage.setItem('authToken', data.token); 
+                        localStorage.setItem('user', JSON.stringify(data.user)); 
                     }
                     if (data.user && data.user.is_verified) {
                         setTimeout(() => {
