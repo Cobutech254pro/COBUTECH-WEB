@@ -28,7 +28,7 @@ const sendVerificationEmail = async (email, code, type = 'account_verification')
       <table width="100%" cellpadding="0" cellspacing="0">
         <tr>
           <td align="center" style="padding: 20px 0;">
-            <img src="../../.. Cobutech/Cobutechimage/cobue.jpeg" alt="Cobutech Logo" width="100" />
+            <img src="../../../Cobutech/Cobutechimage/cobue.jpeg" alt="Cobutech Logo" width="100" />
           </td>
         </tr>
         <tr>
