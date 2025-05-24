@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgot Password - Cobutech</title>
+    <title>𝐂𝐎𝐁𝐔𝐓𝐄𝐂𝐇</title>
     <link rel="stylesheet" href="../../../Cobutech/Cobutechcss/cobu.css">
     <link rel="stylesheet" href="../../../Cobutech/Cobutechcss/cobur.css">
 </head>
 <body>
     <div class="container">
-        <h2>Forgot Password</h2>
+        <h2>𝐅𝐎𝐑𝐆𝐎𝐓 𝐏𝐀𝐒𝐒𝐖𝐎𝐑𝐃</h2>
 
         <div id="email-request-section">
-            <p>Enter your email to receive a password reset code.</p>
+            <p>𝐄𝐧𝐭𝐞𝐫 𝐲𝐨𝐮𝐫 𝐞𝐦𝐚𝐢𝐥 𝐭𝐨 𝐫𝐞𝐜𝐞𝐢𝐯𝐞 𝐚 𝐩𝐚𝐬𝐬𝐰𝐨𝐫𝐝 𝐫𝐞𝐬𝐞𝐭 𝐜𝐨𝐝𝐞.</p>
             <div class="form-group">
-                <label for="email">Email:</label>
+                <label for="email">𝐄𝐦𝐚𝐢𝐥:</label>
                 <input type="email" id="email" name="email" required>
             </div>
-            <button id="send-code-button">Send Reset Code</button>
+            <button id="send-code-button">𝐒𝐞𝐧𝐝 𝐑𝐞𝐬𝐞𝐭 𝐂𝐨𝐝𝐞</button>
             <p class="message" id="email-message"></p>
         </div>
 
         <div id="code-verification-section" style="display: none;">
-            <p>A 6-digit code has been sent to your email. Please enter it below.</p>
+            <p>𝐏𝐫𝐨𝐯𝐢𝐝𝐞 𝐭𝐡𝐞 𝐩𝐚𝐬𝐬𝐰𝐨𝐫𝐝 𝐬𝐞𝐧𝐭 𝐭𝐨 𝐲𝐨𝐮 .</p>
             <div class="code-input-container">
                 <input type="text" class="code-box" maxlength="1">
                 <input type="text" class="code-box" maxlength="1">
@@ -32,33 +32,33 @@
                 <input type="text" class="code-box" maxlength="1">
             </div>
             <p class="message" id="code-message"></p>
-            <p>Attempts left: <span id="attempts-left">3</span></p>
-            <p>Resend code in: <span id="resend-countdown" class="countdown">120</span>s</p>
-            <button id="verify-code-button" disabled>Verify Code</button>
-            <button id="resend-code-button" style="margin-top: 10px;">Resend Code</button>
+            <p>𝐀𝐭𝐭𝐞𝐦𝐩𝐭'𝐬 𝐋𝐞𝐟𝐭: <span id="attempts-left">3</span></p>
+            <p>𝐑𝐞𝐬𝐞𝐧𝐝𝐢𝐧𝐠 𝐜𝐨𝐫𝐞 𝐨𝐧: <span id="resend-countdown" class="countdown">120</span>s</p>
+            <button id="verify-code-button" disabled>𝐕𝐞𝐫𝐢𝐟𝐲 𝐂𝐨𝐝𝐞</button>
+            <button id="resend-code-button" style="margin-top: 10px;">𝐑𝐞𝐬𝐞𝐧𝐝 𝐂𝐨𝐝𝐞</button>
         </div>
 
         <div id="set-new-password-section" style="display: none;">
-            <p>Enter and confirm your new password.</p>
+            <p>𝐄𝐧𝐭𝐞𝐫 𝐚𝐧𝐝 𝐜𝐨𝐧𝐟𝐢𝐫𝐦 𝐲𝐨𝐮𝐫 𝐧𝐞𝐰 𝐩𝐚𝐬𝐬𝐰𝐨𝐫𝐝.</p>
             <div class="form-group">
-                <label for="new-password">New Password:</label>
+                <label for="new-password">𝐍𝐞𝐰 𝐏𝐚𝐬𝐬𝐰𝐨𝐫𝐝:</label>
                 <input type="password" id="new-password" name="new-password" required>
             </div>
             <div class="form-group">
-                <label for="confirm-password">Confirm New Password:</label>
+                <label for="confirm-password">𝐂𝐨𝐧𝐟𝐢𝐫𝐦 𝐍𝐞𝐰 𝐏𝐚𝐬𝐬𝐰𝐨𝐫𝐝:</label>
                 <input type="password" id="confirm-password" name="confirm-password" required>
             </div>
-            <button id="reset-password-button" disabled>Reset Password</button>
+            <button id="reset-password-button" disabled>𝐑𝐞𝐬𝐞𝐭 𝐏𝐚𝐬𝐬𝐰𝐨𝐫𝐝</button>
             <p class="message" id="reset-message"></p>
         </div>
 
         <div id="page-disabled-overlay" class="disabled-overlay" style="display: none;">
-            <p>This page has been disabled due to security concerns or too many failed attempts.</p>
-            <p>Please try again later or contact support.</p>
-            <p>Time remaining: <span id="disabled-countdown"></span></p>
+            <p>𝐓𝐡𝐢𝐬 𝐩𝐚𝐠𝐞 𝐡𝐚𝐬 𝐛𝐞𝐞𝐧 𝐝𝐢𝐬𝐚𝐛𝐥𝐞𝐝 𝐝𝐮𝐞 𝐭𝐨 𝐬𝐞𝐜𝐮𝐫𝐢𝐭𝐲 𝐜𝐨𝐧𝐜𝐞𝐫𝐧𝐬 𝐨𝐫 𝐭𝐨𝐨 𝐦𝐚𝐧𝐲 𝐟𝐚𝐢𝐥𝐞𝐝 𝐚𝐭𝐭𝐞𝐦𝐩𝐭𝐬.</p>
+            <p>𝐏𝐥𝐞𝐚𝐬𝐞 𝐭𝐫𝐲 𝐚𝐠𝐚𝐢𝐧 𝐥𝐚𝐭𝐞𝐫 𝐨𝐫 𝐜𝐨𝐧𝐭𝐚𝐜𝐭 𝐬𝐮𝐩𝐩𝐨𝐫𝐭.</p>
+            <p>𝐓𝐢𝐦𝐞 𝐫𝐞𝐦𝐚𝐢𝐧𝐢𝐧𝐠: <span id="disabled-countdown"></span></p>
         </div>
 
-        <p style="margin-top: 20px;"><a href="cobul.html">Back to Login</a></p>
+        <p style="margin-top: 20px;"><a href="cobul.html">𝐁𝐚𝐜𝐤 𝐭𝐨 𝐋𝐨𝐠𝐢𝐧</a></p>
     </div>
 
     <script src="../../../Cobutech/Cobutechjs/cobur.js"></script>
