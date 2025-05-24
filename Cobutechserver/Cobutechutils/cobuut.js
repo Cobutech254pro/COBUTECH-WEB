@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+
 const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_SERVICE,
     port: process.env.EMAIL_PORT,
@@ -8,24 +9,66 @@ const transporter = nodemailer.createTransport({
         pass: process.env.EMAIL_PASSWORD,
     },
 });
+
 const sendVerificationEmail = async (email, code, type = 'account_verification') => {
     let subject, htmlContent;
 
-    if (type === 'password_reset') {
-        subject = 'Your Cobutech Password Reset Code';
-        htmlContent = `
-            <p>You requested to reset your Cobutech account password.</p>
-            <p>Your password reset code is: <strong>${code}</strong></p>
-            <p>Enter this code to proceed. It will expire in 2 minutes.</p>
-        `;
-    } else {
-        subject = 'Your Cobutech Account Verification Code';
-        htmlContent = `
-            <p>Thank you for signing up for Cobutech!</p>
-            <p>Your verification code is: <strong>${code}</strong></p>
-            <p>Please enter this code to activate your account. It expires in 2 minutes.</p>
-        `;
-    }
+    subject = type === 'password_reset'
+        ? 'Your Cobutech Password Reset Code'
+        : 'Your Cobutech Account Verification Code';
+
+    htmlContent = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8" />
+      <title>${subject}</title>
+    </head>
+    <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #0d0d0d; color: #ffffff;">
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td align="center" style="padding: 20px 0;">
+            <img src="../../.. Cobutech/Cobutechimage/cobue.jpeg" alt="Cobutech Logo" width="100" />
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color: #1a1a1a; padding: 30px; text-align: center;">
+            <h2 style="color: #ffffff;">${subject}</h2>
+            <p style="color: #cccccc;">
+              ${type === 'password_reset'
+                ? 'You requested to reset your Cobutech account password.'
+                : 'Thank you for signing up for Cobutech!'}
+            </p>
+            <p style="color: #cccccc;">Your code is:</p>
+            <div style="margin: 20px auto; padding: 15px; background-color: #262626; display: inline-block; font-size: 24px; color: #00bfff; font-weight: bold;">
+              ${code}
+            </div>
+            <p style="color: #999999;">This code will expire in 2 minutes.</p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style="padding: 20px;">
+            <a href="../../../Cobutech/Cobutechhtml/cobuc.html" style="background-color: #0077ff; padding: 10px 20px; color: #ffffff; text-decoration: none; border-radius: 5px;">
+              Need Help?
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color: #121212; padding: 30px; text-align: center;">
+            <p style="color: #666666;">Follow us:</p>
+            <a href="#"><img src="https://yourdomain.com/icons/facebook.png" alt="Facebook" width="24" style="margin: 0 5px;"></a>
+            <a href="#"><img src="https://yourdomain.com/icons/twitter.png" alt="Twitter" width="24" style="margin: 0 5px;"></a>
+            <a href="#"><img src="https://yourdomain.com/icons/instagram.png" alt="Instagram" width="24" style="margin: 0 5px;"></a>
+            <p style="color: #444444; font-size: 12px; margin-top: 20px;">
+              © Cobutech. Empowering Africa through digital innovation.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
+    `;
+
     try {
         const mailOptions = {
             from: process.env.EMAIL_USER,
@@ -33,6 +76,7 @@ const sendVerificationEmail = async (email, code, type = 'account_verification')
             subject,
             html: htmlContent,
         };
+
         const info = await transporter.sendMail(mailOptions);
         console.log(`Email sent to ${email}: ${info.messageId}`);
         return true;
@@ -41,4 +85,5 @@ const sendVerificationEmail = async (email, code, type = 'account_verification')
         return false;
     }
 };
+
 module.exports = sendVerificationEmail;
