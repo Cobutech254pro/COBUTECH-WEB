@@ -1,7 +1,7 @@
 // Animate the top sentence
 const topTypingElement = document.querySelector('.typing-animation-top');
 if (topTypingElement) {
-    topTypingElement.textContent = "COBUTECH INDUSTRY BEST TECH EVER";
+    topTypingElement.textContent = "𝐂𝐎𝐁𝐔𝐓𝐄𝐂𝐇 𝐈𝐍𝐃𝐔𝐒𝐓𝐑𝐘 𝐁𝐄𝐒𝐓 𝐓𝐄𝐂𝐇 𝐄𝐕𝐄𝐑";
 }
 const continueButton = document.getElementById('continue-button');
 const authButtonsDiv = document.getElementById('auth-buttons');
