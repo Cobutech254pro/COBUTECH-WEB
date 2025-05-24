@@ -1,5 +1,4 @@
 const nodemailer = require('nodemailer');
-
 const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_SERVICE,
     port: process.env.EMAIL_PORT,
@@ -9,36 +8,37 @@ const transporter = nodemailer.createTransport({
         pass: process.env.EMAIL_PASSWORD,
     },
 });
+const sendVerificationEmail = async (email, code, type = 'account_verification') => {
+    let subject, htmlContent;
 
-// This function is now solely for sending account verification codes.
-// The 'type' parameter and 'password_reset' logic have been removed.
-const sendVerificationEmail = async (email, code) => {
-    // Subject for account verification
-    const subject = 'Your Cobutech Account Verification Code';
-
-    // HTML content for account verification
-    const htmlContent = `
-        <p>Thank you for signing up for Cobu Tech Industry!</p>
-        <p>Your verification code is: <strong>${code}</strong></p>
-        <p>Please enter this code on the verification page to activate your account.</p>
-        <p>This code will expire in 2 minutes.</p>
-    `;
-
+    if (type === 'password_reset') {
+        subject = 'Your Cobutech Password Reset Code';
+        htmlContent = `
+            <p>You requested to reset your Cobutech account password.</p>
+            <p>Your password reset code is: <strong>${code}</strong></p>
+            <p>Enter this code to proceed. It will expire in 2 minutes.</p>
+        `;
+    } else {
+        subject = 'Your Cobutech Account Verification Code';
+        htmlContent = `
+            <p>Thank you for signing up for Cobutech!</p>
+            <p>Your verification code is: <strong>${code}</strong></p>
+            <p>Please enter this code to activate your account. It expires in 2 minutes.</p>
+        `;
+    }
     try {
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: email,
-            subject: subject,
+            subject,
             html: htmlContent,
         };
-
         const info = await transporter.sendMail(mailOptions);
-        console.log(`Verification email sent to ${email}: ${info.messageId}`);
+        console.log(`Email sent to ${email}: ${info.messageId}`);
         return true;
     } catch (error) {
-        console.error(`Error sending verification email to ${email}:`, error);
+        console.error(`Error sending email to ${email}:`, error);
         return false;
     }
 };
-
 module.exports = sendVerificationEmail;
