@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         attemptsLeftElement.textContent = attempts;
         if (attempts <= 0) {
             disablePageTemporarily(); 
-            updateMessage(codeMessage, 'Too many failed attempts. This page is disabled.');
+            updateMessage(codeMessage, '𝐓𝐨𝐨 𝐦𝐚𝐧𝐲 𝐟𝐚𝐢𝐥𝐞𝐝 𝐚𝐭𝐭𝐞𝐦𝐩𝐭𝐬. 𝐓𝐡𝐢𝐬 𝐩𝐚𝐠𝐞 𝐢𝐬 𝐝𝐢𝐬𝐚𝐛𝐥𝐞𝐝.');
         }
     };
         userEmail = emailInput.value.trim();
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             console.error('Error requesting password reset code:', error);
-            updateMessage(emailMessage, 'An unexpected error occurred. Please try again.');
+            updateMessage(emailMessage, '𝐀𝐧 𝐮𝐧𝐞𝐱𝐩𝐞𝐜𝐭𝐞𝐝 𝐞𝐫𝐫𝐨𝐫 𝐨𝐜𝐜𝐮𝐫𝐫𝐞𝐝. 𝐏𝐥𝐞𝐚𝐬𝐞 𝐭𝐫𝐲 𝐚𝐠𝐚𝐢𝐧.');
         } finally {
             sendCodeButton.disabled = false;
         }
@@ -130,11 +130,11 @@ document.addEventListener('DOMContentLoaded', () => {
     verifyCodeButton.addEventListener('click', async () => {
         const enteredCode = Array.from(codeBoxes).map(box => box.value).join('');
         if (enteredCode.length !== 6) {
-            updateMessage(codeMessage, 'Please enter the complete 6-digit code.');
+            updateMessage(codeMessage, '𝐏𝐥𝐞𝐚𝐬𝐞 𝐞𝐧𝐭𝐞𝐫 𝐭𝐡𝐞 𝐜𝐨𝐦𝐩𝐥𝐞𝐭𝐞 6-𝐝𝐢𝐠𝐢𝐭 𝐜𝐨𝐝𝐞.');
             return;
         }
         if (!userEmail) { 
-            updateMessage(codeMessage, 'Email not found. Please restart the process.');
+            updateMessage(codeMessage, '𝐍𝐨𝐭 𝐟𝐨𝐮𝐧𝐝 🚫.');
             return;
         }
         verifyCodeButton.disabled = true;
@@ -158,18 +158,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 attempts--;
                 updateAttemptsDisplay();
                 updateMessage(codeMessage, data.message || 'Verification failed.');
-                codeBoxes.forEach(box => box.classList.add('incorrect')); // Red feedback
+                codeBoxes.forEach(box => box.classList.add('incorrect')); 
             }
         } catch (error) {
             console.error('Error verifying password reset code:', error);
-            updateMessage(codeMessage, 'An unexpected error occurred during verification.');
+            updateMessage(codeMessage, '𝐅𝐚𝐢𝐥𝐞𝐝.');
         } finally {
             verifyCodeButton.disabled = false;
         }
     });
     resendCodeButton.addEventListener('click', async () => {
         if (!userEmail) {
-            updateMessage(codeMessage, 'Email not found. Please restart the process.');
+            updateMessage(codeMessage, '𝐍𝐨𝐭 𝐟𝐨𝐮𝐧𝐝.');
             return;
         }
         resendCodeButton.disabled = true;
@@ -186,11 +186,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 startResendCountdown(); 
                 clearCodeBoxes(); 
             } else {
-                updateMessage(codeMessage, data.message || 'Failed to resend code.');
+                updateMessage(codeMessage, data.message || '𝐅𝐚𝐢𝐥𝐞𝐝 𝐭𝐨 𝐫𝐞𝐬𝐞𝐧𝐝 𝐜𝐨𝐝𝐞.');
             }
         } catch (error) {
             console.error('Error resending password reset code:', error);
-            updateMessage(codeMessage, 'An unexpected error occurred. Please try again.');
+            updateMessage(codeMessage, '𝐄𝐫𝐨𝐫 ,🚫.');
         }
     });
     [newPasswordInput, confirmPasswordInput].forEach(input => {
@@ -201,9 +201,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const passwordLengthValid = newPass.length >= 8; 
             resetPasswordButton.disabled = !(passwordMatch && passwordLengthValid);
             if (!passwordLengthValid && newPass.length > 0) {
-                updateMessage(resetMessage, 'Password must be at least 8 characters.', false);
+                updateMessage(resetMessage, '𝐏𝐚𝐬𝐬𝐰𝐨𝐫𝐝 𝐦𝐮𝐬𝐭 𝐛𝐞 𝐚𝐭 𝐥𝐞𝐚𝐬𝐭 8 𝐜𝐡𝐚𝐫𝐚𝐜𝐭𝐞𝐫𝐬.', false);
             } else if (!passwordMatch && confirmPass.length > 0) {
-                updateMessage(resetMessage, 'Passwords do not match.', false);
+                updateMessage(resetMessage, '𝐏𝐚𝐬𝐬𝐰𝐨𝐫𝐝𝐬 𝐝𝐨 𝐧𝐨𝐭 𝐦𝐚𝐭𝐜𝐡.', false);
             } else {
                 updateMessage(resetMessage, '', true); 
             }
@@ -213,15 +213,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const newPassword = newPasswordInput.value.trim();
         const confirmPassword = confirmPasswordInput.value.trim();
         if (newPassword.length < 8) { 
-            updateMessage(resetMessage, 'Password must be at least 8 characters long.');
+            updateMessage(resetMessage, '𝐏𝐚𝐬𝐬𝐰𝐨𝐫𝐝 𝐦𝐮𝐬𝐭 𝐛𝐞 𝐚𝐭 𝐥𝐞𝐚𝐬𝐭 8 𝐜𝐡𝐚𝐫𝐚𝐜𝐭𝐞𝐫𝐬 𝐥𝐨𝐧𝐠.');
             return;
         }
         if (newPassword !== confirmPassword) {
-            updateMessage(resetMessage, 'Passwords do not match.');
+            updateMessage(resetMessage, '𝐏𝐚𝐬𝐬𝐰𝐨𝐫𝐝𝐬 𝐝𝐨 𝐧𝐨𝐭 𝐦𝐚𝐭𝐜𝐡.');
             return;
         }
         if (!userEmail) {
-            updateMessage(resetMessage, 'Email not found. Please restart the process.');
+            updateMessage(resetMessage, '𝐄𝐦𝐚𝐢𝐥 𝐧𝐨𝐭 𝐟𝐨𝐮𝐧𝐝.');
             return;
         }
         resetPasswordButton.disabled = true;
@@ -235,16 +235,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             if (response.ok) {
                 updateMessage(resetMessage, data.message, true);
-                alert(data.message + ' You will now be redirected to the login page.');
+                alert(data.message + '𝐏𝐥𝐞𝐚𝐬𝐞𝐬 𝐥𝐨𝐧𝐠 𝐢𝐧.');
                 setTimeout(() => {
                     window.location.href = '../../../Cobutech/Cobutechhtml/cobul.html'; 
                 }, 2000);
             } else {
-                updateMessage(resetMessage, data.message || 'Failed to reset password.');
+                updateMessage(resetMessage, data.message || '𝐅𝐚𝐢𝐥𝐞𝐝 🚫.');
             }
         } catch (error) {
             console.error('Error resetting password:', error);
-            updateMessage(resetMessage, 'An unexpected error occurred during password reset.');
+            updateMessage(resetMessage, '𝐄𝐫𝐫𝐨𝐫 🚫.');
         } finally {
             resetPasswordButton.disabled = false;
         }
