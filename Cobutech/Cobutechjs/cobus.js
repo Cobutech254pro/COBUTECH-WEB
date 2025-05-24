@@ -10,11 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const signupForm = document.getElementById('signup-form');
     const termsCheckbox = document.getElementById('terms');
     const submitButton = step2.querySelector('button[type="submit"]');
-    const statusMessageElement = document.getElementById('status-message'); 
+    const statusMessageElement = document.getElementById('status-message');
     function displayMessage(message, type) {
         statusMessageElement.textContent = message;
-        statusMessageElement.style.display = 'block'; 
-        statusMessageElement.className = 'status-message'; /
+        statusMessageElement.style.display = 'block';
+        statusMessageElement.className = 'status-message';
         if (type === 'success') {
             statusMessageElement.classList.add('success');
         } else if (type === 'error') {
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         setTimeout(() => {
             statusMessageElement.style.display = 'none';
-            statusMessageElement.textContent = 'status-message';
+            statusMessageElement.textContent = '';
         }, 5000);
     }
     function clearMessages() {
@@ -35,13 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const emailInput = document.getElementById('email');
         if (!usernameInput.value.trim() || !emailInput.value.trim()) {
             displayMessage('Please fill in username and email.', 'error');
-            return; 
+            return;
         }
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
             displayMessage('Please enter a valid email address.', 'error');
             return;
         }
-        clearMessages(); 
+        clearMessages();
         step1.classList.add('hidden');
         step2.classList.remove('hidden');
         setTimeout(() => {
@@ -54,12 +54,16 @@ document.addEventListener('DOMContentLoaded', () => {
         togglePasswordButton.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
     });
     passwordInput.addEventListener('input', () => {
-        clearMessages(); 
+        clearMessages();
         const password = passwordInput.value;
         let strength = 'weak';
-        if (password.length >= 8 && /[a-z]/.test(password) && /[A-Z]/.test(password) && /[0-9]/.test(password) && /[^\w\s]/.test(password)) {
+        if (password.length >= 8 && /[a-z]/.test(password) && /[A-Z]/.test(password) &&
+            /[0-9]/.test(password) && /[^\w\s]/.test(password)) {
             strength = 'strong';
-        } else if (password.length >= 6 && (/[a-zA-Z]/.test(password) && /[0-9]/.test(password)) || (/[a-zA-Z]/.test(password) && /[^\w\s]/.test(password)) || (/[0-9]/.test(password) && /[^\w\s]/.test(password))) {
+        } else if (password.length >= 6 &&
+            ((/[a-zA-Z]/.test(password) && /[0-9]/.test(password)) ||
+            (/[a-zA-Z]/.test(password) && /[^\w\s]/.test(password)) ||
+            (/[0-9]/.test(password) && /[^\w\s]/.test(password)))) {
             strength = 'medium';
         }
         passwordStrengthDiv.textContent = `Password strength: ${strength}`;
@@ -67,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         enableSubmitIfConditionsMet();
     });
     confirmPasswordInput.addEventListener('input', () => {
-        clearMessages(); 
+        clearMessages();
         if (passwordInput.value === confirmPasswordInput.value) {
             passwordMatchDiv.textContent = 'Passwords match';
             passwordMatchDiv.className = 'match';
@@ -78,14 +82,14 @@ document.addEventListener('DOMContentLoaded', () => {
         enableSubmitIfConditionsMet();
     });
     termsCheckbox.addEventListener('change', () => {
-        clearMessages(); 
+        clearMessages();
         enableSubmitIfConditionsMet();
     });
     function enableSubmitIfConditionsMet() {
         const isPasswordMatch = passwordInput.value === confirmPasswordInput.value && passwordInput.value.length > 0;
         const isTermsChecked = termsCheckbox.checked;
-        const currentPasswordStrength = passwordStrengthDiv.className; 
-        const isPasswordStrongEnough = currentPasswordStrength === 'medium' || currentPasswordStrength === 'strong'; 
+        const currentPasswordStrength = passwordStrengthDiv.className;
+        const isPasswordStrongEnough = currentPasswordStrength === 'medium' || currentPasswordStrength === 'strong';
         if (isPasswordMatch && isTermsChecked && isPasswordStrongEnough) {
             submitButton.removeAttribute('disabled');
         } else {
@@ -94,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     signupForm.addEventListener('submit', async (event) => {
         event.preventDefault();
-        clearMessages(); 
+        clearMessages();
         const username = document.getElementById('username').value;
         const email = document.getElementById('email').value;
         const password = passwordInput.value;
@@ -119,33 +123,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({ username, email, password }),
             });
             const data = await response.json();
-            if (!response.ok) {
-                    displayMessage(data.message, 'error'); 
-                    localStorage.setItem('verificationEmail', data.email);
-                    setTimeout(() => {
-                        window.location.href = '../../../Cobutech/Cobutechhtml/cobuv.html';
-                    }, 2000);
-                } else if (response.status === 409 && data.alreadyVerified) {
-                    displayMessage(data.message + ' Please try logging in.', 'error'); 
-          
-                    displayMessage(data.message || 'Sign-up failed due to server error.', 'error'); 
-                }
+            if (response.ok) {
+                displayMessage(data.message || 'Sign-up successful. Please check your email for verification.', 'success');
+                localStorage.setItem('verificationEmail', data.email);
+                setTimeout(() => {
+                    window.location.href = '../../../Cobutech/Cobutechhtml/cobuv.html';
+                }, 2000);
             } else {
-                console.log('Success:', data);
-                displayMessage(data.message || 'Sign-up successful. Please check your email for verification.', 'success'); 
-                if (data.redirectToVerification && data.email) {
-                    localStorage.setItem('verificationEmail', data.email);
-                    setTimeout(() => {
-                        window.location.href = '../../../Cobutech/Cobutechhtml/cobuv.html';
-                    }, 2000);
+                if (response.status === 409 && data.alreadyVerified) {
+                    displayMessage(data.message + ' Please try logging in.', 'error');
                 } else {
-                    console.log("Signup success, but no explicit verification redirect. User might need to log in manually.");
+                    displayMessage(data.message || 'Sign-up failed due to server error.', 'error');
                 }
             }
-
         } catch (error) {
             console.error('Error during signup fetch:', error);
-            displayMessage(error.message || 'Network error or sign-up failed. Please try again.', 'error'); 
+            displayMessage(error.message || 'Network error or sign-up failed. Please try again.', 'error');
         }
     });
     enableSubmitIfConditionsMet();
