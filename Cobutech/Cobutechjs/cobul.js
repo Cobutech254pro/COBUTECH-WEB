@@ -98,29 +98,23 @@ document.addEventListener('DOMContentLoaded', () => {
                         localStorage.setItem('authToken', data.token); // Store JWT
                         localStorage.setItem('user', JSON.stringify(data.user)); // Store user data
                     }
-
-                    // --- Handle redirection based on verification status ---
                     if (data.user && data.user.is_verified) {
                         setTimeout(() => {
-                            window.location.href = '/dashboard'; // Redirect to user dashboard
-                        }, 2000); // Redirect after 2 seconds to show message
+                            window.location.href = '/dashboard'; 
+                        }, 2000); 
                     } else {
-                        // Account not verified, redirect to verification page
-                        displayMessage(data.message || 'Your email is not verified. Please verify your email.', 'error'); // Use new display function
-                        // alert(data.message || 'Your email is not verified. Please verify your email.'); // Old alert removed
-                        localStorage.setItem('verificationEmail', email); // Store email for verification page
+                        displayMessage(data.message || 'Your email is not verified. Please verify your email.', 'error'); 
+                        localStorage.setItem('verificationEmail', email); 
                         setTimeout(() => {
-                            window.location.href = '../../../Cobutech/Cobutechhtml/cobuv.html'; // Redirect to verification page
-                        }, 2000); // Redirect after 2 seconds to show message
+                            window.location.href = '../../../Cobutech/Cobutechhtml/cobuv.html'; 
+                        }, 2000); 
                     }
                 } else {
-                    // Handle server-side errors (e.g., 401, 403, 500)
-                    displayMessage(data.message || 'Login failed. Please try again.', 'error'); // Use new display function
-                    // Specific handling for unverified users, if not already caught by backend's 403 response
+                    displayMessage(data.message || 'Login failed. Please try again.', 'error'); 
                     if (data.email && data.user && !data.user.is_verified) {
-                         localStorage.setItem('verificationEmail', email); // Store email for verification page
+                         localStorage.setItem('verificationEmail', email); 
                          setTimeout(() => {
-                            window.location.href = '../../../Cobutech/Cobutechhtml/cobuv.html'; // Redirect to verification page
+                            window.location.href = '../../../Cobutech/Cobutechhtml/cobuv.html'; 
                          }, 2000);
                     }
                 }
@@ -130,8 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-    // Clear messages when user types in email or password
     emailInput.addEventListener('input', clearMessages);
     passwordInput.addEventListener('input', clearMessages);
 
