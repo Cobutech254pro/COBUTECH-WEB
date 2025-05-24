@@ -12,8 +12,8 @@ const sendVerificationEmail = async (email, code, type = 'account_verification')
     let subject, htmlContent;
 
     subject = type === 'password_reset'
-        ? '𝐘𝐨𝐮𝐫 𝐂𝐨𝐛𝐮𝐭𝐞𝐜𝐡 𝐏𝐚𝐬𝐬𝐰𝐨𝐫𝐝 𝐑𝐞𝐬𝐞𝐭 𝐂𝐨𝐝𝐞
-        : '𝐘𝐨𝐮𝐫 𝐂𝐨𝐛𝐮𝐭𝐞𝐜𝐡 𝐀𝐜𝐜𝐨𝐮𝐧𝐭 𝐕𝐞𝐫𝐢𝐟𝐢𝐜𝐚𝐭𝐢𝐨𝐧 𝐂𝐨𝐝𝐞;
+        ? 'Yuor Cobutech Reset password code 
+        : 'Your Cobutech Account Verification  Code;
     htmlContent = `
     <!DOCTYPE html>
     <html>
@@ -33,8 +33,8 @@ const sendVerificationEmail = async (email, code, type = 'account_verification')
             <h2 style="color: #ffffff;">${subject}</h2>
             <p style="color: #cccccc;">
               ${type === 'password_reset'
-                ? '𝐘𝐨𝐮 𝐫𝐞𝐪𝐮𝐞𝐬𝐭𝐞𝐝 𝐭𝐨 𝐫𝐞𝐬𝐞𝐭 𝐲𝐨𝐮𝐫 𝐂𝐨𝐛𝐮𝐭𝐞𝐜𝐡 𝐚𝐜𝐜𝐨𝐮𝐧𝐭 𝐩𝐚𝐬𝐬𝐰𝐨𝐫𝐝.'
-                : '𝐓𝐡𝐚𝐧𝐤 𝐲𝐨𝐮 𝐟𝐨𝐫 𝐬𝐢𝐠𝐧𝐢𝐧𝐠 𝐮𝐩 𝐟𝐨𝐫 𝐂𝐨𝐛𝐮𝐭𝐞𝐜𝐡!'}
+                ? 'You requested to reset  your  Cobutech account password .'
+                : 'Thsnk you for signing  up for Cobutech !'}
             </p>
             <p style="color: #cccccc;">𝐘𝐨𝐮𝐫 𝐜𝐨𝐝𝐞 𝐢𝐬:</p>
             <div style="margin: 20px auto; padding: 15px; background-color: #262626; display: inline-block; font-size: 24px; color: #00bfff; font-weight: bold;">
