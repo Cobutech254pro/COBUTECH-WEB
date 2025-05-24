@@ -3,25 +3,19 @@ const topTypingElement = document.querySelector('.typing-animation-top');
 if (topTypingElement) {
     topTypingElement.textContent = "COBUTECH INDUSTRY BEST TECH EVER";
 }
-
-// Toggle auth buttons on "Continue" click
 const continueButton = document.getElementById('continue-button');
 const authButtonsDiv = document.getElementById('auth-buttons');
-
 if (continueButton && authButtonsDiv) {
     continueButton.addEventListener('click', () => {
         authButtonsDiv.classList.remove('hidden');
         continueButton.style.display = 'none';
     });
 }
-
-// Animate "TO CONTACT ME" with typewriter and reveal button
 const contactTypingElement = document.querySelector('.typing-animation-contact');
 const contactButton = document.getElementById('contact-button');
 const contactText = "TO CONTACT ME";
 const contactTypingSpeed = 120;
 let contactTextIndex = 0;
-
 function typeContactText() {
     if (contactTypingElement) {
         contactTypingElement.textContent = contactText.substring(0, contactTextIndex);
@@ -33,6 +27,5 @@ function typeContactText() {
         }
     }
 }
-
 if (contactButton) contactButton.style.display = 'none';
 typeContactText();
