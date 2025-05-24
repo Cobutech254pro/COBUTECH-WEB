@@ -28,7 +28,7 @@ const sendVerificationEmail = async (email, code, type = 'account_verification')
       <table width="100%" cellpadding="0" cellspacing="0">
         <tr>
           <td align="center" style="padding: 20px 0;">
-            <img src="../../../Cobutech/Cobutechimage/cobue.jpeg" alt="Cobutech Logo" width="100" />
+            <img src="https://github.com/Cobutech254pro/COBUTECH-WEB/blob/main/Cobutech/Cobutechimages/cobue.jpg" alt="Cobutech Logo" width="100" />
           </td>
         </tr>
         <tr>
@@ -48,7 +48,7 @@ const sendVerificationEmail = async (email, code, type = 'account_verification')
         </tr>
         <tr>
           <td align="center" style="padding: 20px;">
-            <a href="../../../Cobutech/Cobutechhtml/cobuc.html" style="background-color: #0077ff; padding: 10px 20px; color: #ffffff; text-decoration: none; border-radius: 5px;">
+            <a href="https://github.com/Cobutech254pro/COBUTECH-WEB/blob/main/Cobutech/Cobutechhtml/cobuc.html" style="background-color: #0077ff; padding: 10px 20px; color: #ffffff; text-decoration: none; border-radius: 5px;">
               Need Help?
             </a>
           </td>
@@ -56,9 +56,9 @@ const sendVerificationEmail = async (email, code, type = 'account_verification')
         <tr>
           <td style="background-color: #121212; padding: 30px; text-align: center;">
             <p style="color: #666666;">Follow us:</p>
-            <a href="#"><img src="https://yourdomain.com/icons/facebook.png" alt="Facebook" width="24" style="margin: 0 5px;"></a>
-            <a href="#"><img src="https://yourdomain.com/icons/twitter.png" alt="Twitter" width="24" style="margin: 0 5px;"></a>
-            <a href="#"><img src="https://yourdomain.com/icons/instagram.png" alt="Instagram" width="24" style="margin: 0 5px;"></a>
+            <a href="#"><img src="https://github.com/Cobutech254pro/COBUTECH-WEB/blob/main/Cobutech/Cobutechimages/facebook.png" alt="Facebook" width="24" style="margin: 0 5px;"></a>
+            <a href="#"><img src="https://github.com/Cobutech254pro/COBUTECH-WEB/blob/main/Cobutech/Cobutechimages/twitter.png" alt="Twitter" width="24" style="margin: 0 5px;"></a>
+            <a href="#"><img src="https://github.com/Cobutech254pro/COBUTECH-WEB/blob/main/Cobutech/Cobutechimages/instagram.png" alt="Instagram" width="24" style="margin: 0 5px;"></a>
             <p style="color: #444444; font-size: 12px; margin-top: 20px;">
               © Cobutech. Empowering Africa through digital innovation.
             </p>
