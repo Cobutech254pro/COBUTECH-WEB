@@ -9,12 +9,10 @@ const transporter = nodemailer.createTransport({
     },
 });
 const sendVerificationEmail = async (email, code, type = 'account_verification') => {
-    let subject, htmlContent;
-
-    subject = type === 'password_reset'
-        ? 'Yuor Cobutech Reset password code 
-        : 'Your Cobutech Account Verification  Code;
-    htmlContent = `
+    const subject = type === 'password_reset'
+        ? 'Your Cobutech Password Reset Code'
+        : 'Your Cobutech Account Verification Code';
+    const htmlContent = `
     <!DOCTYPE html>
     <html>
     <head>
@@ -25,7 +23,7 @@ const sendVerificationEmail = async (email, code, type = 'account_verification')
       <table width="100%" cellpadding="0" cellspacing="0">
         <tr>
           <td align="center" style="padding: 20px 0;">
-            <img src="https://github.com/Cobutech254pro/COBUTECH-WEB/blob/main/Cobutech/Cobutechimages/cobue.jpg" alt="Cobutech Logo" width="100" />
+            <img src="https://raw.githubusercontent.com/Cobutech254pro/COBUTECH-WEB/main/Cobutech/Cobutechimages/cobue.jpg" alt="Cobutech Logo" width="100" />
           </td>
         </tr>
         <tr>
@@ -33,8 +31,8 @@ const sendVerificationEmail = async (email, code, type = 'account_verification')
             <h2 style="color: #ffffff;">${subject}</h2>
             <p style="color: #cccccc;">
               ${type === 'password_reset'
-                ? 'You requested to reset  your  Cobutech account password .'
-                : 'Thsnk you for signing  up for Cobutech !'}
+                ? 'You requested to reset your Cobutech account password.'
+                : 'Thank you for signing up for Cobutech!'}
             </p>
             <p style="color: #cccccc;">𝐘𝐨𝐮𝐫 𝐜𝐨𝐝𝐞 𝐢𝐬:</p>
             <div style="margin: 20px auto; padding: 15px; background-color: #262626; display: inline-block; font-size: 24px; color: #00bfff; font-weight: bold;">
@@ -53,11 +51,11 @@ const sendVerificationEmail = async (email, code, type = 'account_verification')
         <tr>
           <td style="background-color: #121212; padding: 30px; text-align: center;">
             <p style="color: #666666;">𝐅𝐨𝐥𝐥𝐨𝐰 𝐮𝐬:</p>
-            <a href="#"><img src="https://github.com/Cobutech254pro/COBUTECH-WEB/blob/main/Cobutech/Cobutechimages/facebook.png" alt="Facebook" width="24" style="margin: 0 5px;"></a>
-            <a href="#"><img src="https://github.com/Cobutech254pro/COBUTECH-WEB/blob/main/Cobutech/Cobutechimages/twitter.png" alt="Twitter" width="24" style="margin: 0 5px;"></a>
-            <a href="#"><img src="https://github.com/Cobutech254pro/COBUTECH-WEB/blob/main/Cobutech/Cobutechimages/instagram.png" alt="Instagram" width="24" style="margin: 0 5px;"></a>
+            <a href="#"><img src="https://raw.githubusercontent.com/Cobutech254pro/COBUTECH-WEB/main/Cobutech/Cobutechimages/facebook.png" alt="Facebook" width="24" style="margin: 0 5px;"></a>
+            <a href="#"><img src="https://raw.githubusercontent.com/Cobutech254pro/COBUTECH-WEB/main/Cobutech/Cobutechimages/twitter.png" alt="Twitter" width="24" style="margin: 0 5px;"></a>
+            <a href="#"><img src="https://raw.githubusercontent.com/Cobutech254pro/COBUTECH-WEB/main/Cobutech/Cobutechimages/instagram.png" alt="Instagram" width="24" style="margin: 0 5px;"></a>
             <p style="color: #444444; font-size: 12px; margin-top: 20px;">
-              © 𝐂𝐨𝐛𝐮𝐭𝐞𝐜𝐡. 𝐄𝐦𝐩𝐨𝐰𝐞𝐫𝐢𝐧𝐠 𝐭𝐠𝐞 𝐰𝐨𝐫𝐥𝐝 𝐭𝐡𝐫𝐨𝐮𝐠𝐡 𝐝𝐢𝐠𝐢𝐭𝐚𝐥 𝐢𝐧𝐧𝐨𝐯𝐚𝐭𝐢𝐨𝐧.
+              © 𝐂𝐨𝐛𝐮𝐭𝐞𝐜𝐡. 𝐄𝐦𝐩𝐨𝐰𝐞𝐫𝐢𝐧𝐠 𝐭𝐡𝐞 𝐰𝐨𝐫𝐥𝐝 𝐭𝐡𝐫𝐨𝐮𝐠𝐡 𝐝𝐢𝐠𝐢𝐭𝐚𝐥 𝐢𝐧𝐧𝐨𝐯𝐚𝐭𝐢𝐨𝐧.
             </p>
           </td>
         </tr>
@@ -67,11 +65,11 @@ const sendVerificationEmail = async (email, code, type = 'account_verification')
     `;
     try {
         const mailOptions = {
-          from: `"𝐂𝐎𝐁𝐔-𝐓𝐄𝐂𝐇 𝐈𝐍𝐃𝐔𝐒𝐓𝐑𝐘" <${process.env.EMAIL_USER}>`,
-          to: email,
-          subject,
-          html: htmlContent,
-    };
+            from: `"𝐂𝐎𝐁𝐔-𝐓𝐄𝐂𝐇 𝐈𝐍𝐃𝐔𝐒𝐓𝐑𝐘" <${process.env.EMAIL_USER}>`,
+            to: email,
+            subject,
+            html: htmlContent,
+        };
         const info = await transporter.sendMail(mailOptions);
         console.log(`Email sent to ${email}: ${info.messageId}`);
         return true;
