@@ -43,7 +43,7 @@ const sendVerificationEmail = async (email, code, type = 'account_verification')
         </tr>
         <tr>
           <td align="center" style="padding: 20px;">
-            <a href="https://github.com/Cobutech254pro/COBUTECH-WEB/blob/main/Cobutech/Cobutechhtml/cobuc.html" style="background-color: #0077ff; padding: 10px 20px; color: #ffffff; text-decoration: none; border-radius: 5px;">
+            <a href="+254796281776" style="background-color: #0077ff; padding: 10px 20px; color: #ffffff; text-decoration: none; border-radius: 5px;">
               𝐍𝐞𝐞𝐝 𝐇𝐞𝐥𝐩?
             </a>
           </td>
